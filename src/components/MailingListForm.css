@@ -1,0 +1,19 @@
+.formContainer {
+  padding: 20px;
+  background-color: #6C88CF;
+  color: #FFD872;
+  font-family: 'Arial', sans-serif;
+}
+
+.formField {
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: #FC6238;
+  color: #FFD872;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

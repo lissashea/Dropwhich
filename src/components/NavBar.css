@@ -1,0 +1,18 @@
+.navContainer {
+  background-color: #FC6238;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  color: #FFD872;
+  font-family: 'Comic Sans MS', sans-serif;
+}
+
+.navLink {
+  color: #FFD872;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  color: #F2D4CC;
+  text-decoration: underline;
+}
