@@ -1,0 +1,10 @@
+.confirmationContainer {
+  padding: 20px;
+  background-color: #f0e130;
+  color: #6b238e;
+  font-family: 'Arial', sans-serif;
+}
+
+.text {
+  margin-bottom: 20px;
+}
