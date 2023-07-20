@@ -1,0 +1,28 @@
+/* components/Footer.css */
+
+.footerContainer {
+  background-color: #6C88CF;
+  color: #F2D4CC;
+  padding: 20px 0;
+  text-align: center;
+  position: fixed; /* Set the position to fixed */
+  bottom: 0; /* Position at the bottom of the viewport */
+  left: 0; /* Align to the left edge */
+  right: 0; /* Align to the right edge */
+}
+
+.footerContent {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footerContact {
+  margin: 5px 15px;
+}
+
+.footerContact span {
+  font-weight: bold;
+}
+
+/* Adjust the styling as needed */

@@ -1,0 +1,47 @@
+/* components/OrderForm.css */
+
+.orderForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  font-size: 25px;
+  color: #6C88CF;
+}
+
+.orderDeadline {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    color: #ff0000; /* Start with red color */
+  }
+  50% {
+    color: #00ff00; /* Transition to green color */
+  }
+  100% {
+    color: #ff0000; /* Return to red color */
+  }
+}
+
+.madLibInput {
+  padding: 10px;
+  margin: 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6C88CF;
+  color: #F2D4CC;
+  cursor: pointer;
+  font-family: 'Genty', 'Comic Sans MS', cursive, sans-serif;
+  font-size:25px;
+
+}

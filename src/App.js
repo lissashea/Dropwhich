@@ -11,7 +11,7 @@ import Navbar from "./components/NavBar.jsx";
 import SignUp from "./components/SignUp.jsx";
 import SignOut from "./components/SignOut.jsx";
 import SignIn from "./components/SignIn.jsx";
-
+import Footer from "./components/Footer.jsx"
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
         <Route path="/signout" element={<SignOut />} />
         <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
+      <Footer /> {/* Add the Footer component directly here */}
     </div>
   );
 }
