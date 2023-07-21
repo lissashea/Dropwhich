@@ -33,4 +33,8 @@
   .footerContact.instagram {
     display: none;
   }
+
+  .footerContainer {
+    padding: 0;
+  }
 }

@@ -76,15 +76,17 @@
   font-weight: bold;
 }
 
+/* Media query for small screens (e.g., mobile devices) */
 @media (max-width: 767px) {
   /* Hide the countdown container on mobile */
   .countdownContainer {
-    display: none;
+    display: block;
   }
 
   /* Adjust the height for smaller screens */
   .orderform-container {
     min-height: calc(100vh - 200px);
+    padding-bottom: 60px; /* Add padding to the bottom to make space for the footer */
   }
 
   /* Show the orderDeadline text on mobile */
@@ -92,13 +94,13 @@
     display: block;
     font-size: 16px;
     margin: 10px;
+    text-align: center; /* Center the order deadline text */
   }
 
   /* Adjust the layout of the form elements for smaller screens */
   .orderForm {
     font-size: 20px;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column; /* Change the direction to column */
     justify-content: center;
     align-items: center;
   }
@@ -113,27 +115,58 @@
     font-size: 20px;
     width: 90%;
     max-width: 300px; /* Set a maximum width for better display on smaller screens */
+    margin: 10px 0; /* Add margin to center the submit button */
   }
 }
 
-/* Additional styles for larger screens (min-width: 768px) */
-@media (min-width: 768px) {
-  /* Hide the countdown on larger screens */
-  .countdownContainer {
-    display: flex;
-    margin-bottom: 20px;
-    font-size: 18px;
-    color: #6C88CF;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .orderDeadline {
-    display: block;
-  }
-
+/* Media query for screens less than 1158px width and 671px height */
+@media (max-width: 1158px) and (max-height: 671px) {
   .orderForm {
-    font-size: 25px; /* Reset font size for large screens */
+    flex-direction: column; /* Change the direction to column */
+    align-items: center; /* Center the form elements vertically */
+  }
+
+  .madLibInput,
+  .submitButton {
+    width: 90%; /* Reset the width to fill the container on smaller screens */
+    max-width: 300px; /* Set a maximum width for better display on smaller screens */
+    margin-bottom: 10px; /* Add margin between form elements */
+  }
+
+  /* Show each label and input on its own row */
+  label {
+    display: block;
+    text-align: center;
+    margin-bottom: 15px; /* Add extra margin between labels and inputs */
+  }
+  
+  /* Add some margin below the form on smaller screens */
+  form {
+    margin-bottom: 40px;
+  }
+}
+
+/* Additional styles for screens around 500px width and 743px height */
+@media (max-width: 520px) and (max-height: 743px) {
+  .orderForm {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .madLibInput,
+  .submitButton {
+    width: 90%;
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  form {
+    margin-bottom: 40px;
   }
 }

@@ -52,49 +52,41 @@ function OrderForm() {
           <p>Thank you for your order.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Sandwich:
-            <select
-              name="sandwich"
-              value={order.sandwich}
-              onChange={handleChange}
-              className="madLibInput"
-            >
-              <option>--Select a sandwich--</option>
-              <option value="sandwich1">Sandwich 1</option>
-              <option value="sandwich2">Sandwich 2</option>
-              {/* Add as many options as needed */}
-            </select>
-          </label>
-          <label>
-            Side:
-            <select
-              name="side"
-              value={order.side}
-              onChange={handleChange}
-              className="madLibInput"
-            >
-              <option>--Select a side--</option>
-              <option value="side1">Side 1</option>
-              <option value="side2">Side 2</option>
-              {/* Add as many options as needed */}
-            </select>
-          </label>
-          <label>
-            Address:
-            <input
-              type="text"
-              name="address"
-              value={order.address}
-              onChange={handleChange}
-              className="madLibInput"
-            />
-          </label>
-          <button type="submit" className="submitButton">
-            Submit
-          </button>
-        </form>
+        <div className="orderform-container">
+          <form onSubmit={handleSubmit}>
+            <label>
+              Sandwich:
+              <select
+                name="sandwich"
+                className="madLibInput"
+                onChange={handleChange}
+              >
+                <option>--Select a sandwich--</option>
+                <option value="sandwich1">Sandwich 1</option>
+                <option value="sandwich2">Sandwich 2</option>
+              </select>
+            </label>
+            <label>
+              Side:
+              <select name="side" className="madLibInput" onChange={handleChange}>
+                <option>--Select a side--</option>
+                <option value="side1">Side 1</option>
+                <option value="side2">Side 2</option>
+              </select>
+            </label>
+            <label>
+              Address:
+              <input
+                type="text"
+                name="address"
+                className="madLibInput"
+                value={order.address}
+                onChange={handleChange}
+              />
+            </label>
+            <button type="submit" className="submitButton">Submit</button>
+          </form>
+        </div>
       )}
 
       {/* Place the Countdown component outside the form container */}

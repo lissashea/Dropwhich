@@ -36,16 +36,12 @@ function Countdown({ targetDate }) {
 
   return (
     <div className="countdownContainer">
-      {!isMobile && (
-        <>
-          <h2>Order Countdown:</h2>
-          <p className="hideOnMobile">
-            {timeLeft.days} {timeLeft.days === 1 ? "Day" : "Days"}{" "}
-            {timeLeft.hours} Hours {timeLeft.minutes} Minutes{" "}
-            {timeLeft.seconds} Seconds
-          </p>
-        </>
-      )}
+      <p className="countdownText">
+      <h2>Order Countdown:</h2>
+        {timeLeft.days} {timeLeft.days === 1 ? "Day" : "Days"}{" "}
+        {timeLeft.hours} Hours {timeLeft.minutes} Minutes{" "}
+        {timeLeft.seconds} Seconds
+      </p>
       <p className="orderDeadline">
         Orders must be submitted by Tuesday at 12 PM PST for Thursday delivery.
       </p>
