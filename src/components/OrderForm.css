@@ -94,13 +94,25 @@
     margin: 10px;
   }
 
-  /* Adjust the font size of the form elements for smaller screens */
+  /* Adjust the layout of the form elements for smaller screens */
   .orderForm {
     font-size: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .madLibInput {
+    margin: 5px;
+    width: 90%;
+    max-width: 300px; /* Set a maximum width for better display on smaller screens */
   }
 
   .submitButton {
     font-size: 20px;
+    width: 90%;
+    max-width: 300px; /* Set a maximum width for better display on smaller screens */
   }
 }
 
@@ -118,7 +130,7 @@
   }
 
   .orderDeadline {
-    display: none;
+    display: block;
   }
 
   .orderForm {
