@@ -7,6 +7,8 @@
   margin-top: 50px;
   font-size: 25px;
   color: #6C88CF;
+  overflow-y: auto; /* Add this property to enable vertical scrolling for the form */
+  min-height: 75vh;
 }
 
 .orderDeadline {
@@ -42,6 +44,22 @@
   color: #F2D4CC;
   cursor: pointer;
   font-family: 'Genty', 'Comic Sans MS', cursive, sans-serif;
-  font-size:25px;
+  font-size: 25px;
+}
 
+@media (max-width: 480px) {
+  .orderForm {
+    font-size: 20px; /* Reduce font size for smaller screens */
+  }
+
+  .submitButton {
+    font-size: 20px; /* Adjust the font size of the submit button for smaller screens */
+  }
+}
+
+/* Media query for large screens (e.g., laptops and desktops) */
+@media (min-width: 1025px) {
+  .orderForm {
+    font-size: 25px; /* Reset font size for large screens */
+  }
 }

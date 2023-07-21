@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
+import sandwichImage from "../sandwich.png";
 
 function OrderForm() {
   const [order, setOrder] = useState({
@@ -88,10 +89,12 @@ function OrderForm() {
         <button type="submit" className="submitButton">
           Submit
         </button>
+        <img
+          src={sandwichImage}
+          alt="Delicious Sandwich"
+          style={{ width: "100px", height: "auto" }}
+        />
       </form>
-
-      {/* Display information about order deadline and countdown */}
-      
     </div>
   );
 }

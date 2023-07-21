@@ -1,8 +1,11 @@
+ // components/Menu.jsx
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Menu.css"
+import "./Menu.css";
+import sandwichImage from '../sandwich.png';
 
-function Menu() {
+function Menu({ imagesize }) {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
@@ -29,22 +32,37 @@ function Menu() {
   const goToOrderForm = () => {
     navigate("/order");
   };
-
   return (
     <div className="menu-container">
       <h1>Menu</h1>
-      <p>This week's menu is...</p>
-      <p>Available until {new Date().toLocaleDateString()}</p>
-      {items.map((item) => (
-        <div key={item.id}>
-          <h2>{item.name}</h2>
-          <p>{item.description}</p>
-          <p>${item.price}</p>
+      <div className="menu-content">
+        <div className="menu-item">
+          <h2>This Week's Sandwich:</h2>
+          {items.map((item) => (
+            <div key={item.id}>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              <p>${item.price.toFixed(2)}</p>
+            </div>
+          ))}
         </div>
-      ))}
+        <div className="menu-item">
+          <h2>This Week's Side:</h2>
+          {/* Add your side item information here */}
+        </div>
+      </div>
+      <p>Available until {new Date().toLocaleDateString()}</p>
       <button onClick={goToOrderForm} className="order-button">
         Order Here
       </button>
+      <div className="menu-image">
+        {/* Apply the 'menu-image' class to the 'img' element */}
+        <img
+          src={sandwichImage}
+          alt="Delicious Sandwich"
+          style={{ width: "100px", height: "auto" }}
+        />
+      </div>
     </div>
   );
 }

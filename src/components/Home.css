@@ -1,13 +1,17 @@
+/* components/Home.css */
+
 .homeContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 25px;
+  margin: 25px;
   background-color: #F2D4CC;
   color: #6C88CF;
   border-radius: 15px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  min-height: 100vh;
+  min-height: 75vh;
+  font-size: 1.5rem;
 }
 
 .textContainer {
@@ -23,9 +27,9 @@
 }
 
 .button {
-  background-color: #FC6238;
+  background-color: #6C88CF;
   margin: 10px;
-  color: #6C88CF;
+  color: #F2D4CC;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -33,3 +37,5 @@
   text-decoration: none;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* Add styles for the image container */

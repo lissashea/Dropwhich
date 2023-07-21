@@ -2,13 +2,14 @@
   background-color: #FC6238;
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 20px 0;
   color: #FFD872;
 }
 
 .navLink {
   color: #FFD872;
   text-decoration: none;
+  font-size: 1.5rem;
 }
 
 .navLink:hover {

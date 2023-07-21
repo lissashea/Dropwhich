@@ -1,19 +1,47 @@
+/* components/Menu.css */
 
 .menu-container {
-  padding: 20px;
-  background-color: #F2D4CC;
-  color: #6C88CF;
-  border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  height: 100vh;
+  text-align: center;
+  margin-top: 20px;
+  color: #6c88cf;
 }
 
-.menuItem {
+.menu-content {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  /* flex-wrap: wrap; */
+  flex-direction: row;
+  color: #6c88cf;
+}
+
+.menu-items {
+  width: 48%; /* Adjust the width to create two columns */
+  text-align: left;
+}
+
+.menu-items h2 {
+  margin-bottom: 10px;
+  color: #6c88cf;
+}
+
+.menu-items div {
   margin-bottom: 20px;
-  padding: 10px;
-  background-color: #E77577;
-  border-radius: 5px;
-  color: #F2D4CC;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  color: #000000;
 }
 
+.menu-image {
+  width: 100%; /* Adjust the width to create two columns */
+}
+
+.order-button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6c88cf;
+  color: #f2d4cc;
+  cursor: pointer;
+  font-family: "Genty", "Comic Sans MS", cursive, sans-serif;
+  font-size: 25px;
+}
