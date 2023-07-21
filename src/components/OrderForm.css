@@ -1,3 +1,4 @@
+
 /* components/OrderForm.css */
 
 .orderForm {
@@ -5,9 +6,9 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  justify-content: baseline;
   font-size: 25px;
   color: #6C88CF;
-  border: solid;
 }
 
 .orderform-container {
@@ -24,6 +25,7 @@
   animation: pulse 2s infinite;
 }
 
+
 @keyframes pulse {
   50% {
     color: #ea479e; /* Start with red color */
@@ -37,32 +39,31 @@
   }
 }
 
+.dropdown {
+padding:10px;
+border-radius: 10px;
+border:solid #ea479e;
+width:40%;
+margin-left:15px;
+text-align: center;
+}
+
 label {
-  display: block;
+  display: block; /* Display the labels as blocks to stack them vertically */
   text-align: left;
   margin-bottom: 10px;
-  border: solid;
+  padding:10px;
 }
 
 .madLibInput {
-  width: 40%;
+  width:30%;
+  margin-left:15px;
   padding: 10px;
-  border-radius: 5px;
-  background-color: #f5f5f5;
-  display: block;
-  margin-top: 8px;
-  border-radius:5px;
-}
-
-.dropdown {
-  width: 40%;
-  padding: 10px;
-  margin-top:8px;
-  border: none;
-  border-radius: 5px;
+  margin-bottom: 20px;
+  border:solid #ea479e;
+  border-radius: 10px;
   background-color: #f5f5f5;
 }
-
 
 .submitButton {
   padding: 10px 20px;
@@ -131,7 +132,7 @@ label {
 
   .madLibInput {
     margin: 5px;
-    width: 40%;
+    width: 90%;
     max-width: 300px; /* Set a maximum width for better display on smaller screens */
   }
 
@@ -141,11 +142,6 @@ label {
     max-width: 300px; /* Set a maximum width for better display on smaller screens */
     margin: 10px 0; /* Add margin to center the submit button */
   }
-
-  label {
-    margin-bottom: 5px; /* Add a smaller margin between labels and inputs */
-  }
-
 }
 
 /* Media query for screens less than 1158px width and 671px height */
@@ -156,9 +152,8 @@ label {
   }
 
   .madLibInput,
-  .dropdown,
   .submitButton {
-    width: 90%; /* Reset the width to fill the container on smaller screens */
+    width: 50%; /* Reset the width to fill the container on smaller screens */
     /* max-width: 300px; Set a maximum width for better display on smaller screens */
     margin-bottom: 10px; /* Add margin between form elements */
   }
@@ -185,14 +180,14 @@ label {
 
   .madLibInput,
   .submitButton {
-    width: 90%;
-    max-width: 300px;
+    width: 40%;
+    max-width: 200px;
     margin-bottom: 15px;
   }
 
   label {
     display: block;
-    text-align: center;
+    text-align: start;
     margin-bottom: 20px;
   }
 
