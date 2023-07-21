@@ -40,7 +40,7 @@ function OrderForm() {
   };
 
   return (
-    <div>
+    <div className="orderform-container">
       <div className="countdownContainer">
         <Countdown targetDate={targetDate} />
       </div>
@@ -89,11 +89,11 @@ function OrderForm() {
         <button type="submit" className="submitButton">
           Submit
         </button>
-        <img
+        {/* <img
           src={sandwichImage}
           alt="Delicious Sandwich"
           style={{ width: "100px", height: "auto" }}
-        />
+        /> */}
       </form>
     </div>
   );

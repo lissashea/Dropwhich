@@ -13,13 +13,13 @@
 }
 
 @keyframes pulse {
-  0% {
-    color: #ff0000; /* Start with red color */
+  25% {
+    color: #ea479e; /* Start with red color */
   }
-  50% {
+  75% {
     color: #00ff00; /* Transition to green color */
   }
   100% {
-    color: #ff0000; /* Return to red color */
+    color: #ea479e; /* Return to red color */
   }
 }
