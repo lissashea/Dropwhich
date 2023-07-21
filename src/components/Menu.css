@@ -9,12 +9,16 @@
   min-height: 60vh;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .menu-content {
   display: flex;
   justify-content: space-evenly;
   align-content: center;
-  /* flex-wrap: wrap; */
-  flex-direction: row;
+  flex-wrap: wrap;
+  flex-direction: col;
   color: #6c88cf;
 }
 
@@ -59,4 +63,21 @@
   color: #6C88CF;
   /* Add 3D effect on hover */
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+@media (max-width: 767px) {
+  .menu-items {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+  }
+}
+
+/* Media query for screens with a maximum width of 667px (specific breakpoint for smaller devices) */
+@media (max-width: 667px) {
+  .menu-container {
+    display: flex;
+    flex-direction: column;
+  }
 }

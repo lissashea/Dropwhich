@@ -49,8 +49,8 @@ function Menu({ imagesize }) {
     <div className="menu-container">
       <h1>Menu</h1>
       <div className="menu-content">
-        <div className="menu-item">
-          <h2>This Week's Sandwich:</h2>
+      <div className="menu-item">
+  <h2><span className="underline">Sandwich</span></h2>
           {items
             .filter((item) => item.id <= 2) // Filter out the sandwich items
             .map((item) => (
@@ -62,7 +62,7 @@ function Menu({ imagesize }) {
             ))}
         </div>
         <div className="menu-item">
-          <h2>This Week's Side:</h2>
+        <h2><span className="underline">Side</span></h2>
           {items
             .filter((item) => item.id > 2) // Filter out the side items
             .map((item) => (
