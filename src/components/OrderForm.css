@@ -36,9 +36,16 @@
   }
 }
 
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
 .madLibInput {
+  width: 90%;
   padding: 10px;
-  margin: 25px;
+  margin-bottom: 20px;
   border: none;
   border-radius: 5px;
   background-color: #f5f5f5;
@@ -85,8 +92,12 @@
 
   /* Adjust the height for smaller screens */
   .orderform-container {
-    min-height: calc(100vh - 200px);
+    min-height: auto;
     padding-bottom: 60px; /* Add padding to the bottom to make space for the footer */
+    padding-top:40px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Show the orderDeadline text on mobile */
@@ -129,7 +140,7 @@
   .madLibInput,
   .submitButton {
     width: 90%; /* Reset the width to fill the container on smaller screens */
-    max-width: 300px; /* Set a maximum width for better display on smaller screens */
+    /* max-width: 300px; Set a maximum width for better display on smaller screens */
     margin-bottom: 10px; /* Add margin between form elements */
   }
 

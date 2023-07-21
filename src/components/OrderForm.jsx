@@ -54,6 +54,7 @@ function OrderForm() {
       ) : (
         <div className="orderform-container">
           <form onSubmit={handleSubmit}>
+            {/* Sandwich selection */}
             <label>
               Sandwich:
               <select
@@ -66,14 +67,46 @@ function OrderForm() {
                 <option value="sandwich2">Sandwich 2</option>
               </select>
             </label>
+
+            {/* Side selection */}
             <label>
               Side:
-              <select name="side" className="madLibInput" onChange={handleChange}>
+              <select
+                name="side"
+                className="madLibInput"
+                onChange={handleChange}
+              >
                 <option>--Select a side--</option>
                 <option value="side1">Side 1</option>
                 <option value="side2">Side 2</option>
               </select>
             </label>
+
+            {/* Name input */}
+            <label>
+              Name:
+              <input
+                type="text"
+                name="name"
+                className="madLibInput"
+                value={order.name}
+                onChange={handleChange}
+              />
+            </label>
+
+            {/* Phone number input */}
+            <label>
+              Phone Number:
+              <input
+                type="text"
+                name="phone"
+                className="madLibInput"
+                value={order.phone}
+                onChange={handleChange}
+              />
+            </label>
+
+            {/* Address input */}
             <label>
               Address:
               <input
@@ -84,15 +117,29 @@ function OrderForm() {
                 onChange={handleChange}
               />
             </label>
-            <button type="submit" className="submitButton">Submit</button>
+
+            {/* Delivery instructions input */}
+            <label>
+              Delivery Instructions:
+              <input
+                name="deliveryInstructions"
+                className="madLibInput"
+                value={order.deliveryInstructions}
+                onChange={handleChange}
+              />
+            </label>
+
+            <button type="submit" className="submitButton">
+              Submit
+            </button>
+            <div className="countdownContainer">
+              <Countdown targetDate={targetDate} />
+            </div>
           </form>
         </div>
       )}
 
       {/* Place the Countdown component outside the form container */}
-      <div className="countdownContainer">
-        <Countdown targetDate={targetDate} />
-      </div>
     </div>
   );
 }
