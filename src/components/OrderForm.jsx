@@ -59,7 +59,7 @@ function OrderForm() {
               Sandwich:
               <select
                 name="sandwich"
-                className="madLibInput"
+                className="dropdown"
                 onChange={handleChange}
               >
                 <option>--Select a sandwich--</option>
@@ -73,7 +73,7 @@ function OrderForm() {
               Side:
               <select
                 name="side"
-                className="madLibInput"
+                className="dropdown"
                 onChange={handleChange}
               >
                 <option>--Select a side--</option>
