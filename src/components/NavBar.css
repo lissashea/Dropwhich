@@ -16,3 +16,17 @@
   color: #ea479e;
   text-decoration: underline;
 }
+
+
+/* Add a media query for mobile screens (max-width: 767px) */
+@media (max-width: 767px) {
+  /* Hide the navLink element containing "Home" on mobile */
+  .navLink.home {
+    display: none;
+  }
+
+  /* Hide the navLink element containing "Sign In" on mobile */
+  .navLink.signin {
+    display: none;
+  }
+}

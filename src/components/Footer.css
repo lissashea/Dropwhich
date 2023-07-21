@@ -5,10 +5,12 @@
   color: #F2D4CC;
   padding: 20px 0;
   text-align: center;
-  position: fixed; 
-  bottom: 0; /* Position at the bottom of the viewport */
-  left: 0; /* Align to the left edge */
-  right: 0; /* Align to the right edge */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0; /* Remove margin to allow more space for the content above */
+
 }
 
 .footerContent {
@@ -25,4 +27,10 @@
   font-size: 1.5rem;
 }
 
-/* Adjust the styling as needed */
+/* Add a media query for mobile screens (max-width: 767px) */
+@media (max-width: 767px) {
+  /* Hide the footerContact element containing Instagram on mobile */
+  .footerContact.instagram {
+    display: none;
+  }
+}

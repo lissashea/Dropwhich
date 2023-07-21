@@ -1,5 +1,3 @@
-// components/OrderForm.js
-
 import React, { useState } from "react";
 import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
@@ -11,6 +9,8 @@ function OrderForm() {
     side: "",
     address: "",
   });
+
+  const [orderSubmitted, setOrderSubmitted] = useState(false);
 
   const getNextTuesday = () => {
     const now = new Date();
@@ -36,65 +36,71 @@ function OrderForm() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(order),
+    }).then((response) => {
+      if (response.ok) {
+        setOrderSubmitted(true);
+      }
     });
   };
 
   return (
-    <div className="orderform-container">
+    <div className="orderForm">
+      <h1>Order Form:</h1>
+      {orderSubmitted ? (
+        <div className="confirmationMessage">
+          <p>Order submitted successfully!</p>
+          <p>Thank you for your order.</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Sandwich:
+            <select
+              name="sandwich"
+              value={order.sandwich}
+              onChange={handleChange}
+              className="madLibInput"
+            >
+              <option>--Select a sandwich--</option>
+              <option value="sandwich1">Sandwich 1</option>
+              <option value="sandwich2">Sandwich 2</option>
+              {/* Add as many options as needed */}
+            </select>
+          </label>
+          <label>
+            Side:
+            <select
+              name="side"
+              value={order.side}
+              onChange={handleChange}
+              className="madLibInput"
+            >
+              <option>--Select a side--</option>
+              <option value="side1">Side 1</option>
+              <option value="side2">Side 2</option>
+              {/* Add as many options as needed */}
+            </select>
+          </label>
+          <label>
+            Address:
+            <input
+              type="text"
+              name="address"
+              value={order.address}
+              onChange={handleChange}
+              className="madLibInput"
+            />
+          </label>
+          <button type="submit" className="submitButton">
+            Submit
+          </button>
+        </form>
+      )}
+
+      {/* Place the Countdown component outside the form container */}
       <div className="countdownContainer">
         <Countdown targetDate={targetDate} />
       </div>
-      <form className="orderForm" onSubmit={handleSubmit}>
-        <label>
-          Sandwich:
-          <select
-            name="sandwich"
-            value={order.sandwich}
-            onChange={handleChange}
-            className="madLibInput"
-          >
-            <option>--Select a sandwich--</option>
-            <option value="sandwich1">Sandwich 1</option>
-            <option value="sandwich2">Sandwich 2</option>
-            {/* Add as many options as needed */}
-          </select>
-        </label>
-
-        <label>
-          Side:
-          <select
-            name="side"
-            value={order.side}
-            onChange={handleChange}
-            className="madLibInput"
-          >
-            <option>--Select a side--</option>
-            <option value="side1">Side 1</option>
-            <option value="side2">Side 2</option>
-            {/* Add as many options as needed */}
-          </select>
-        </label>
-
-        <label>
-          Address:
-          <input
-            type="text"
-            name="address"
-            value={order.address}
-            onChange={handleChange}
-            className="madLibInput"
-          />
-        </label>
-
-        <button type="submit" className="submitButton">
-          Submit
-        </button>
-        {/* <img
-          src={sandwichImage}
-          alt="Delicious Sandwich"
-          style={{ width: "100px", height: "auto" }}
-        /> */}
-      </form>
     </div>
   );
 }

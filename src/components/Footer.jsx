@@ -8,13 +8,13 @@ function Footer() {
     <footer className="footerContainer">
       <div className="footerContent">
         <p className="footerContact">
-          <span>Instagram:</span> @cathstable
-        </p>
-        <p className="footerContact">
           <span>Email:</span> dropwich@gmail.com
         </p>
         <p className="footerContact">
           <span>Phone:</span> 555-555-5555
+        </p>
+        <p className="footerContact instagram">
+          <span>Instagram:</span> @cathstable
         </p>
       </div>
     </footer>

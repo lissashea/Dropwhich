@@ -5,7 +5,7 @@ const mapImageUrl = require('../Screenshot 2023-07-20 at 4.03.06 PM.png');
 
 function Faq() {
   return (
-    <div>
+    <div className="faq-container">
       <h1>FAQ</h1>
       <p>Q: What is the delivery zone?</p>
       <p>A: We deliver within a 10 mile radius of the Santa Monica Pier. See the map below for our delivery area:</p>

@@ -3,6 +3,7 @@ import "./Countdown.css";
 
 function Countdown({ targetDate }) {
   const [timeLeft, setTimeLeft] = useState({});
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
 
   useEffect(() => {
     function calculateTimeLeft() {
@@ -15,23 +16,37 @@ function Countdown({ targetDate }) {
       };
     }
 
+    function handleResize() {
+      setIsMobile(window.innerWidth <= 767);
+    }
+
     setTimeLeft(calculateTimeLeft());
 
     const timerId = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    return () => clearInterval(timerId);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearInterval(timerId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [targetDate]);
 
   return (
-    <div>
-      <h2>Order Countdown:</h2>
-      <p>
-        {timeLeft.days} {timeLeft.days === 1 ? "Day" : "Days"} {timeLeft.hours}{" "}
-        Hours {timeLeft.minutes} Minutes {timeLeft.seconds} Seconds
-      </p>
-      <p className="orderDeadline"> {/* Move className here */}
+    <div className="countdownContainer">
+      {!isMobile && (
+        <>
+          <h2>Order Countdown:</h2>
+          <p className="hideOnMobile">
+            {timeLeft.days} {timeLeft.days === 1 ? "Day" : "Days"}{" "}
+            {timeLeft.hours} Hours {timeLeft.minutes} Minutes{" "}
+            {timeLeft.seconds} Seconds
+          </p>
+        </>
+      )}
+      <p className="orderDeadline">
         Orders must be submitted by Tuesday at 12 PM PST for Thursday delivery.
       </p>
     </div>

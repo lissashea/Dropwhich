@@ -14,8 +14,8 @@ const Home = ({ imageSize }) => {
           featured sandwich and deli side each week.
         </p>
         <div className="buttonContainer">
-          <Link to="/menu" className="buttonContainer">
-            See This Week's Menu
+          <Link to="/menu" className="menu-button">
+            <span>See This Week's Menu</span>
           </Link>
         </div>
         <div className="imageContainer">
