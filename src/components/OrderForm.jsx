@@ -45,7 +45,7 @@ function OrderForm() {
 
   return (
     <div className="orderForm">
-      <h1>Order Form:</h1>
+      <h1>Order Form</h1>
       {orderSubmitted ? (
         <div className="confirmationMessage">
           <p>Order submitted successfully!</p>
@@ -62,7 +62,7 @@ function OrderForm() {
                 className="dropdown"
                 onChange={handleChange}
               >
-                <option>--Select a sandwich--</option>
+                <option>Select a sandwich</option>
                 <option value="sandwich1">Sandwich 1</option>
                 <option value="sandwich2">Sandwich 2</option>
               </select>
@@ -76,7 +76,7 @@ function OrderForm() {
                 className="dropdown"
                 onChange={handleChange}
               >
-                <option>--Select a side--</option>
+                <option>Select a side</option>
                 <option value="side1">Side 1</option>
                 <option value="side2">Side 2</option>
               </select>

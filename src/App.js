@@ -12,6 +12,7 @@ import SignUp from "./components/SignUp.jsx";
 import SignOut from "./components/SignOut.jsx";
 import SignIn from "./components/SignIn.jsx";
 import Footer from "./components/Footer.jsx"
+import Reviews from "./components/Reviews.jsx";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/reviews" element={<Reviews />} />
       </Routes>
       <Footer /> {/* Add the Footer component directly here */}
     </div>
