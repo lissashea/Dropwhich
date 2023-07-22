@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
-import sandwichImage from "../sandwich.png";
+import sandwichImage from "../images-drop/sandwich-transparent.png";
 
 function OrderForm() {
   const [order, setOrder] = useState({

@@ -1,16 +1,19 @@
 .homeContainer {
   display: flex;
+  position: absolute;
+  top: 75px; /* Adjust the value as needed to set the distance from the top */
   align-items: center;
   justify-content: center;
   padding: 25px;
   margin: 25px;
-  background-color: #F2D4CC;
+  background-color: rgba(242, 212, 204, 0.9);
   color: #6C88CF;
   border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  min-height: 50vh;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
   font-size: 1.5rem;
+  z-index: 1;
 }
+
 
 span {
  color: #ea479e;

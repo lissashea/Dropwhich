@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Menu.css";
-import sandwichImage from "../sandwich.png";
+import sandwichImage from "../images-drop/sandwich-transparent.png";
 
 function Menu({ imagesize }) {
   const [items, setItems] = useState([]);

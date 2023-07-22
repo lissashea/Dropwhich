@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css"; // Update the CSS file import if needed
-import sandwichImage from "../sandwich.png";
+import sandwichImage from "../images-drop/sandwich-transparent.png";
 
 const Home = ({ imageSize }) => {
   return (
@@ -22,7 +22,7 @@ const Home = ({ imageSize }) => {
           <img
             src={sandwichImage}
             alt="Delicious Sandwich"
-            style={{ width: "100px", height: "auto" }}
+            style={{ width: imageSize, height: "auto" }}
           />{" "}
         </div>
       </div>

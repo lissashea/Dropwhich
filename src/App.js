@@ -11,26 +11,31 @@ import Navbar from "./components/NavBar.jsx";
 import SignUp from "./components/SignUp.jsx";
 import SignOut from "./components/SignOut.jsx";
 import SignIn from "./components/SignIn.jsx";
-import Footer from "./components/Footer.jsx"
+import Footer from "./components/Footer.jsx";
 import Reviews from "./components/Reviews.jsx";
+import ImageGrid from "./components/ImageGrid"; // Import the ImageGrid component
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu imagesize="200px" />} />
-        <Route path="/order" element={<OrderForm />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signout" element={<SignOut />} />
-        <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/reviews" element={<Reviews />} />
-      </Routes>
-      <Footer /> {/* Add the Footer component directly here */}
-    </div>
+        <Navbar />
+        <div className="backgroundContainer">
+          {/* Add the ImageGrid component here */}
+          <ImageGrid />
+        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/order" element={<OrderForm />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signout" element={<SignOut />} />
+          <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/reviews" element={<Reviews />} />
+        </Routes>
+        <Footer />
+      </div>
   );
 }
 

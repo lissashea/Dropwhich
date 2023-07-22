@@ -1,14 +1,15 @@
 .menu-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  margin-top: 25px;
+  margin-top: 75px; /* Adjust the margin as needed to set the distance from the top */
   color: #ea479e; /* Change the text color to match the "Order Form" text */
   border-radius: 15px;
   padding: 25px;
-  margin: 25px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  min-height: 60vh;
-  background-color: #f2d4cc;
-  min-height: 58px;
+  background-color: rgba(242, 212, 204, 0.8);
+  min-width: auto;
 }
 
 h1 {
@@ -22,14 +23,14 @@ h1 {
   text-decoration: underline;
 }
 
-.menu-content {
+/* .menu-content {
   display: flex;
   justify-content: space-evenly;
   align-content: center;
   flex-wrap: wrap;
   flex-direction: col;
   color: #6c88cf;
-}
+} */
 
 .menu-items {
   width: 48%; /* Adjust the width to create two columns */

@@ -9,7 +9,8 @@
 
 body {
   font-family: 'Genty', sans-serif;
-  background-color: #ecd6dc; /* Replace with your desired color */
+  background-repeat: repeat; /* Adjust the repeat property as needed */
+  background-size: cover; /* Adjust the size property as needed */
   margin: 0;
   padding: 0;
   width: 100%;
