@@ -5,7 +5,7 @@ import mapImageUrl from "../deliveryzone.png"; // Assuming the image is in the s
 function Faq() {
   return (
     <div className="faq-container">
-      <h1>FAQ</h1>
+      {/* <h1>FAQ</h1> */}
       <p>Q: What is the delivery zone?</p>
       <p>A: We deliver within a 10-mile radius of the Santa Monica Pier. See the map below for our delivery area:</p>
       <img src={mapImageUrl} alt="Delivery Area Map" />

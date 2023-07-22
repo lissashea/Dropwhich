@@ -1,12 +1,21 @@
 .menu-container {
   text-align: center;
-  margin-top: 20px;
-  color: #6c88cf;
+  margin-top: 25px;
+  color: #ea479e; /* Change the text color to match the "Order Form" text */
   border-radius: 15px;
   padding: 25px;
   margin: 25px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   min-height: 60vh;
+  background-color: #f2d4cc;
+  min-height: 58px;
+}
+
+h1 {
+  font-size:54px;
+  margin:auto;
+  /* margin: 0px 368px; */
+  color:#6c88cf;
 }
 
 .underline {

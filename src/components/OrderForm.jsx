@@ -45,7 +45,7 @@ function OrderForm() {
 
   return (
     <div className="orderForm">
-      <h1>Order Form</h1>
+      {/* <h1>Order Form</h1> */}
       {orderSubmitted ? (
         <div className="confirmationMessage">
           <p>Order submitted successfully!</p>
@@ -53,20 +53,21 @@ function OrderForm() {
         </div>
       ) : (
         <div className="orderform-container">
-          <form onSubmit={handleSubmit}>
-            {/* Sandwich selection */}
-            <label>
-              Sandwich:
-              <select
-                name="sandwich"
-                className="dropdown"
-                onChange={handleChange}
-              >
-                <option>Select a sandwich</option>
-                <option value="sandwich1">Sandwich 1</option>
-                <option value="sandwich2">Sandwich 2</option>
-              </select>
-            </label>
+          <div className="orderForm-column1">
+            <form onSubmit={handleSubmit}>
+              {/* Sandwich selection */}
+              <label>
+                Sandwich:
+                <select
+                  name="sandwich"
+                  className="dropdown"
+                  onChange={handleChange}
+                >
+                  <option>Select a sandwich</option>
+                  <option value="sandwich1">Sandwich 1</option>
+                  <option value="sandwich2">Sandwich 2</option>
+                </select>
+              </label>
 
             {/* Side selection */}
             <label>
@@ -128,17 +129,18 @@ function OrderForm() {
                 onChange={handleChange}
               />
             </label>
-
             <button type="submit" className="submitButton">
               Submit
             </button>
-            <div className="countdownContainer">
-              <Countdown targetDate={targetDate} />
-            </div>
           </form>
         </div>
-      )}
-
+        <div className="orderForm-column2">
+          <div className="countdownContainer">
+            <Countdown targetDate={targetDate} />
+          </div>
+        </div>
+      </div>
+    )}
       {/* Place the Countdown component outside the form container */}
     </div>
   );

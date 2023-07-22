@@ -46,8 +46,9 @@ function Menu({ imagesize }) {
   };
 
   return (
+    <>
+    {/* <h1>Menu</h1> */}
     <div className="menu-container">
-      <h1>Menu</h1>
       <div className="menu-content">
       <div className="menu-item">
   <h2><span className="underline">Sandwich</span></h2>
@@ -87,6 +88,7 @@ function Menu({ imagesize }) {
         /> */}
       </div>
     </div>
+    </>
   );
 }
 
