@@ -4,9 +4,9 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
   grid-template-rows: repeat(5, 1fr); /* 5 rows */
-  gap: 10px; /* Adjust the gap between images as desired */
+  gap: 5px; /* Adjust the gap between images as desired */
   width: 100%;
   height: 100vh; /* Adjust the height of the container as needed */
-  background-color: #F2D4CC; /* Set a background color as a fallback */
+  background-color: white; /* Set a background color as a fallback */
 }
 
