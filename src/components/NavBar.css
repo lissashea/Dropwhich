@@ -4,6 +4,7 @@
   justify-content: space-around;
   padding: 20px 0;
   color: #FFD872;
+  z-index: 8;
 }
 
 .navLink {

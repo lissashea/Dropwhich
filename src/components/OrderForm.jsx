@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
-import sandwichImage from "../images-drop/sandwich-transparent.png";
 
 function OrderForm() {
   const [order, setOrder] = useState({
@@ -14,14 +13,13 @@ function OrderForm() {
 
   const getNextTuesday = () => {
     const now = new Date();
-    const daysUntilNextTuesday = 2 - now.getDay() + 7; // Calculate days until next Tuesday
+    const daysUntilNextTuesday = 2 - now.getDay() + 7;
     const nextTuesday = new Date(now);
     nextTuesday.setDate(nextTuesday.getDate() + daysUntilNextTuesday);
-    nextTuesday.setHours(12, 0, 0, 0); // Set the time to 12 PM PST
+    nextTuesday.setHours(12, 0, 0, 0);
     return nextTuesday;
   };
 
-  // Define the target date for the countdown (Tuesday at 12 PM PST)
   const targetDate = getNextTuesday();
 
   const handleChange = (event) => {
@@ -45,7 +43,6 @@ function OrderForm() {
 
   return (
     <div className="orderForm">
-      {/* <h1>Order Form</h1> */}
       {orderSubmitted ? (
         <div className="confirmationMessage">
           <p>Order submitted successfully!</p>
@@ -55,7 +52,6 @@ function OrderForm() {
         <div className="orderform-container">
           <div className="orderForm-column1">
             <form onSubmit={handleSubmit}>
-              {/* Sandwich selection */}
               <label>
                 Sandwich:
                 <select
@@ -69,79 +65,80 @@ function OrderForm() {
                 </select>
               </label>
 
-            {/* Side selection */}
-            <label>
-              Side:
-              <select
-                name="side"
-                className="dropdown"
-                onChange={handleChange}
-              >
-                <option>Select a side</option>
-                <option value="side1">Side 1</option>
-                <option value="side2">Side 2</option>
-              </select>
-            </label>
+              {/* Side selection */}
+              <label>
+                Side:
+                <select
+                  name="side"
+                  className="dropdown"
+                  onChange={handleChange}
+                >
+                  <option>Select a side</option>
+                  <option value="side1">Side 1</option>
+                  <option value="side2">Side 2</option>
+                </select>
+              </label>
 
-            {/* Name input */}
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                className="madLibInput"
-                value={order.name}
-                onChange={handleChange}
-              />
-            </label>
+              {/* Name input */}
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  className="madLibInput"
+                  value={order.name}
+                  onChange={handleChange}
+                />
+              </label>
 
-            {/* Phone number input */}
-            <label>
-              Phone Number:
-              <input
-                type="text"
-                name="phone"
-                className="madLibInput"
-                value={order.phone}
-                onChange={handleChange}
-              />
-            </label>
+              {/* Phone number input */}
+              <label>
+                Phone Number:
+                <input
+                  type="text"
+                  name="phone"
+                  className="madLibInput"
+                  value={order.phone}
+                  onChange={handleChange}
+                />
+              </label>
 
-            {/* Address input */}
-            <label>
-              Address:
-              <input
-                type="text"
-                name="address"
-                className="madLibInput"
-                value={order.address}
-                onChange={handleChange}
-              />
-            </label>
+              {/* Address input */}
+              <label>
+                Address:
+                <input
+                  type="text"
+                  name="address"
+                  className="madLibInput"
+                  value={order.address}
+                  onChange={handleChange}
+                />
+              </label>
 
-            {/* Delivery instructions input */}
-            <label>
-              Delivery Instructions:
-              <input
-                name="deliveryInstructions"
-                className="madLibInput"
-                value={order.deliveryInstructions}
-                onChange={handleChange}
-              />
-            </label>
-            <button type="submit" className="submitButton">
-              Submit
-            </button>
-          </form>
-        </div>
-        <div className="orderForm-column2">
-          <div className="countdownContainer">
-            <Countdown targetDate={targetDate} />
+              {/* Delivery instructions input */}
+              <label>
+                Delivery Instructions:
+                <input
+                  name="deliveryInstructions"
+                  className="madLibInput"
+                  value={order.deliveryInstructions}
+                  onChange={handleChange}
+                />
+              </label>
+
+              <button type="submit" className="submitButton">
+                Submit
+              </button>
+            </form>
+          </div>
+
+          <div className="orderForm-column2">
+            <div className="countdownContainer">
+              <Countdown targetDate={targetDate} />
+            </div>
           </div>
         </div>
-      </div>
-    )}
-      {/* Place the Countdown component outside the form container */}
+      )}
     </div>
   );
 }

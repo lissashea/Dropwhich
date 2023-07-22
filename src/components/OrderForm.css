@@ -1,44 +1,52 @@
-
 /* components/OrderForm.css */
 
 .orderForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 25px; */
-  justify-content: baseline;
   font-size: 25px;
   color: #6C88CF;
   margin-bottom: 100px;
+  z-index: 2;
 }
 
-
 .orderform-container {
-  /* text-align: center;
-  /* margin-top: 25px; */
   color: #6c88cf;
   background-color: rgba(242, 212, 204, 0.9);
   border-radius: 15px;
-  padding: 25px; 
-  margin-top: 25px;
-  /* margin: 25px; */
+  padding: 25px;
+  /* margin-top: 25px; */
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  /* width: auto; */
+  width: 100vh;
+  height: 70vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   display: flex;
-  flex-wrap: wrap; /* Wrap the columns if there's not enough space */
-  justify-content: space-between; /* Spread columns horizontally */
-  align-items: flex-start; /* Align columns at the top */
+  flex-direction: row;
+}
+
+.backgroundContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 .orderForm-column1 {
-  flex: 1; /* Take up equal width as much as possible */
-  max-width: 400px; /* Set a maximum width for the column */
-  margin-right: 20px; /* Add some space between columns */
+  flex: 1;
+  max-width: 500px;
+  margin-right: 20px;
+margin: auto;
 }
 
 .orderForm-column2 {
-  flex: 1; /* Take up equal width as much as possible */
-  max-width: 400px; /* Set a maximum width for the column */
+  flex: 1;
+  max-width: 400px;
   max-height: 600px;
   margin: auto;
 }
@@ -47,49 +55,47 @@
   animation: pulse 2s infinite;
 }
 
-
 @keyframes pulse {
   50% {
-    color: #ea479e; /* Start with red color */
+    color: #ea479e;
   } 
 
   50% {
-    color: #00ff00; /* Transition to green color */
+    color: #00ff00;
   }
   50% {
-    color: #ea479e; /* Return to red color */
+    color: #ea479e;
   }
 }
 
 .dropdown {
-padding:10px;
-border-radius: 10px;
-border:solid #ea479e;
-width:40%;
-margin-left:15px;
-text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid #ea479e;
+  width: 50%;
+  margin-left: 15px;
+  text-align: center;
 }
 
 label {
-  display: block; /* Display the labels as blocks to stack them vertically */
+  display: block;
   text-align: left;
   margin-bottom: 10px;
-  padding:10px;
+  padding: 10px;
 }
 
 .madLibInput {
-  width:30%;
-  margin-left:15px;
+  width: 40%;
+  margin-left: 10px;
   padding: 10px;
   margin-bottom: 20px;
-  border:solid #ea479e;
+  border: solid #ea479e;
   border-radius: 10px;
   background-color: #f5f5f5;
 }
 
 .submitButton {
   padding: 10px 20px;
-  margin-top: 20px;
   margin-bottom: 10px;
   border: none;
   border-radius: 5px;
@@ -98,26 +104,24 @@ label {
   cursor: pointer;
   font-family: 'Genty', 'Comic Sans MS', cursive, sans-serif;
   font-size: 25px;
-  text-decoration: none; /* Remove underline from the button text */
-  transition: all 0.2s ease; /* Add a smooth transition effect on hover */
-  /* Add 3D effect */
+  text-decoration: none;
+  transition: all 0.2s ease;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .submitButton:hover {
   background-color: #F2D4CC;
   color: #6C88CF;
-  /* Add 3D effect on hover */
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Add styles for the confirmation message */
 .confirmationMessage {
   margin-top: 20px;
   color: #6c88cf;
   font-size: 20px;
   font-weight: bold;
 }
+
 
 /* Media query for small screens (e.g., mobile devices) */
 @media (max-width: 767px) {

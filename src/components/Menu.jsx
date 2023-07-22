@@ -75,7 +75,7 @@ function Menu({ imagesize }) {
             ))}
         </div>
       </div>
-      <p>Available until {new Date().toLocaleDateString()}</p>
+      {/* <p>Available until {new Date().toLocaleDateString()}</p> */}
       <button onClick={goToOrderForm} className="order-button">
         Order Here
       </button>

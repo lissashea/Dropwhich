@@ -5,6 +5,7 @@ import sandwichImage from "../images-drop/sandwich-transparent.png";
 
 const Home = ({ imageSize }) => {
   return (
+    <div className="backgroundContainer">
     <div className="homeContainer">
       <div className="textContainer">
         <h1>Welcome to <span>Dropwich!</span></h1>
@@ -26,6 +27,7 @@ const Home = ({ imageSize }) => {
           />{" "}
         </div>
       </div>
+    </div>
     </div>
   );
 };

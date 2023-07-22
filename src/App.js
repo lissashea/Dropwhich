@@ -24,7 +24,7 @@ function App() {
           <ImageGrid />
         </div>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home imageSize="100px" />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/order" element={<OrderForm />} />
           <Route path="/faq" element={<Faq />} />
