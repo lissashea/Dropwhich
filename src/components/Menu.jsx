@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Menu.css";
-import sandwichImage from "../images-drop/sandwich-transparent.png";
 
 function Menu({ imagesize }) {
   const [items, setItems] = useState([]);
@@ -47,47 +46,51 @@ function Menu({ imagesize }) {
 
   return (
     <>
-    {/* <h1>Menu</h1> */}
-    <div className="menu-container">
-      <div className="menu-content">
-      <div className="menu-item">
-  <h2><span className="underline">Sandwich</span></h2>
-          {items
-            .filter((item) => item.id <= 2) // Filter out the sandwich items
-            .map((item) => (
-              <div key={item.id}>
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-                <p>${item.price.toFixed(2)}</p>
-              </div>
-            ))}
+      {/* <h1>Menu</h1> */}
+      <div className="menu-container">
+        <div className="menu-content">
+          <div className="menu-item">
+            <h2>
+              <span className="underline">Sandwich</span>
+            </h2>
+            {items
+              .filter((item) => item.id <= 2) // Filter out the sandwich items
+              .map((item) => (
+                <div key={item.id}>
+                  <h3>{item.name}</h3>
+                  <p>{item.description}</p>
+                  <p>${item.price.toFixed(2)}</p>
+                </div>
+              ))}
+          </div>
+          <div className="menu-item">
+            <h2>
+              <span className="underline">Side</span>
+            </h2>
+            {items
+              .filter((item) => item.id > 2) // Filter out the side items
+              .map((item) => (
+                <div key={item.id}>
+                  <h3>{item.name}</h3>
+                  <p>{item.description}</p>
+                  <p>${item.price.toFixed(2)}</p>{" "}
+                </div>
+              ))}
+          </div>
         </div>
-        <div className="menu-item">
-        <h2><span className="underline">Side</span></h2>
-          {items
-            .filter((item) => item.id > 2) // Filter out the side items
-            .map((item) => (
-              <div key={item.id}>
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-                <p>${item.price.toFixed(2)}</p>{" "}
-              </div>
-            ))}
-        </div>
-      </div>
-      {/* <p>Available until {new Date().toLocaleDateString()}</p> */}
-      <button onClick={goToOrderForm} className="order-button">
-        Order Here
-      </button>
-      <div className="menu-image">
-        {/* Apply the 'menu-image' class to the 'img' element */}
-        {/* <img
+        <p>Available until {new Date().toLocaleDateString()}</p>
+        <button onClick={goToOrderForm} className="order-button">
+          Order Here
+        </button>
+        <div className="menu-image">
+          {/* Apply the 'menu-image' class to the 'img' element */}
+          {/* <img
           src={sandwichImage}
           alt="Delicious Sandwich"
           style={{ width: "100px", height: "auto" }}
         /> */}
+        </div>
       </div>
-    </div>
     </>
   );
 }

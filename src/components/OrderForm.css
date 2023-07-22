@@ -1,101 +1,73 @@
-/* components/OrderForm.css */
 
 .orderForm {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* margin-top: 25px; */
+  justify-content: baseline;
   font-size: 25px;
   color: #6C88CF;
-  margin-bottom: 100px;
-  z-index: 2;
 }
 
 .orderform-container {
+  text-align: center;
+  background-color: #F2D4CC;
+  margin-top: 25px;
   color: #6c88cf;
-  background-color: rgba(242, 212, 204, 0.96);
   border-radius: 15px;
   padding: 25px;
-  /* margin-top: 25px; */
+  /* margin: 25px; */
+  z-index: 3;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  width: 100vh;
-  height: 70vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: row;
-}
-
-.backgroundContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.orderForm-column1 {
-  flex: 1;
-  max-width: 500px;
-  margin-right: 20px;
-margin: auto;
-}
-
-.orderForm-column2 {
-  flex: 1;
-  max-width: 400px;
-  max-height: 600px;
-  margin: auto;
 }
 
 .orderDeadline {
   animation: pulse 2s infinite;
 }
 
+
 @keyframes pulse {
   50% {
-    color: #ea479e;
+    color: #ea479e; /* Start with red color */
   } 
 
   50% {
-    color: #00ff00;
+    color: #00ff00; /* Transition to green color */
   }
   50% {
-    color: #ea479e;
+    color: #ea479e; /* Return to red color */
   }
 }
 
 .dropdown {
-  padding: 10px;
-  border-radius: 10px;
-  border: solid #ea479e;
-  width: 50%;
-  margin-left: 15px;
-  text-align: center;
+padding:10px;
+border-radius: 10px;
+border:solid #ea479e;
+width:40%;
+margin-left:15px;
+text-align: center;
 }
 
 label {
-  display: block;
+  display: block; /* Display the labels as blocks to stack them vertically */
   text-align: left;
   margin-bottom: 10px;
-  padding: 10px;
+  padding:10px;
 }
 
 .madLibInput {
-  width: 40%;
-  margin-left: 10px;
+  width:30%;
+  margin-left:15px;
   padding: 10px;
   margin-bottom: 20px;
-  border: solid #ea479e;
+  border:solid #ea479e;
   border-radius: 10px;
   background-color: #f5f5f5;
 }
 
 .submitButton {
   padding: 10px 20px;
+  margin-top: 20px;
   margin-bottom: 10px;
   border: none;
   border-radius: 5px;
@@ -104,17 +76,20 @@ label {
   cursor: pointer;
   font-family: 'Genty', 'Comic Sans MS', cursive, sans-serif;
   font-size: 25px;
-  text-decoration: none;
-  transition: all 0.2s ease;
+  text-decoration: none; /* Remove underline from the button text */
+  transition: all 0.2s ease; /* Add a smooth transition effect on hover */
+  /* Add 3D effect */
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .submitButton:hover {
   background-color: #F2D4CC;
   color: #6C88CF;
+  /* Add 3D effect on hover */
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Add styles for the confirmation message */
 .confirmationMessage {
   margin-top: 20px;
   color: #6c88cf;
@@ -122,27 +97,21 @@ label {
   font-weight: bold;
 }
 
-
 /* Media query for small screens (e.g., mobile devices) */
 @media (max-width: 767px) {
   /* Hide the countdown container on mobile */
   .countdownContainer {
-    display: none;
-  }
-
-  .backgroundContainer {
-    display: none;
+    display: block;
   }
 
   /* Adjust the height for smaller screens */
   .orderform-container {
     min-height: auto;
     padding-bottom: 60px; /* Add padding to the bottom to make space for the footer */
-    padding-top: 20px;
+    padding-top:40px;
     margin: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 
   /* Show the orderDeadline text on mobile */
@@ -151,7 +120,6 @@ label {
     font-size: 16px;
     margin: 10px;
     text-align: center; /* Center the order deadline text */
-    background-color: white;
   }
 
   /* Adjust the layout of the form elements for smaller screens */
@@ -162,16 +130,16 @@ label {
     align-items: center;
   }
 
-  /* Adjust the width of input elements for better fit on mobile */
   .madLibInput {
+    margin: 5px;
     width: 90%;
     max-width: 300px; /* Set a maximum width for better display on smaller screens */
   }
 
-  /* Adjust the width of the submit button for better fit on mobile */
   .submitButton {
     font-size: 20px;
-    width: 100%;
+    width: 90%;
+    max-width: 300px; /* Set a maximum width for better display on smaller screens */
     margin: 10px 0; /* Add margin to center the submit button */
   }
 }
@@ -196,7 +164,7 @@ label {
     text-align: center;
     margin-bottom: 15px; /* Add extra margin between labels and inputs */
   }
-
+  
   /* Add some margin below the form on smaller screens */
   form {
     margin-bottom: 40px;
