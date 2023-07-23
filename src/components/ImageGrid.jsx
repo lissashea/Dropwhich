@@ -30,36 +30,48 @@ import image25 from "../images-drop/image25.png";
 import image26 from "../images-drop/image26.png";
 import image27 from "../images-drop/image27.png";
 
+const images = [
+  image1,
+  image2,
+  image3,
+  image4,
+  image5,
+  image6,
+  image7,
+  image8,
+  image9,
+  image10,
+  image11,
+  image12,
+  image13,
+  image14,
+  image15,
+  image16,
+  image17,
+  image18,
+  image19,
+  image20,
+  image21,
+  image22,
+  image23,
+  image24,
+  image25,
+  image26,
+  image27,
+  image1,
+  image2,
+  image3,
+  image4,
+  image5
+]
+
+
 const ImageGrid = () => {
   return (
     <div className="image-grid-container">
-      <div style={{ backgroundImage: `url(${image1})` }}></div>
-      <div style={{ backgroundImage: `url(${image2})` }}></div>
-      <div style={{ backgroundImage: `url(${image3})` }}></div>
-      <div style={{ backgroundImage: `url(${image4})` }}></div>
-      <div style={{ backgroundImage: `url(${image5})` }}></div>
-      <div style={{ backgroundImage: `url(${image6})` }}></div>
-      <div style={{ backgroundImage: `url(${image7})` }}></div>
-      <div style={{ backgroundImage: `url(${image8})` }}></div>
-      <div style={{ backgroundImage: `url(${image9})` }}></div>
-      <div style={{ backgroundImage: `url(${image10})` }}></div>
-      <div style={{ backgroundImage: `url(${image11})` }}></div>
-      <div style={{ backgroundImage: `url(${image12})` }}></div>
-      <div style={{ backgroundImage: `url(${image13})` }}></div>
-      <div style={{ backgroundImage: `url(${image14})` }}></div>
-      <div style={{ backgroundImage: `url(${image15})` }}></div>
-      <div style={{ backgroundImage: `url(${image16})` }}></div>
-      <div style={{ backgroundImage: `url(${image17})` }}></div>
-      <div style={{ backgroundImage: `url(${image18})` }}></div>
-      <div style={{ backgroundImage: `url(${image19})` }}></div>
-      <div style={{ backgroundImage: `url(${image20})` }}></div>
-      <div style={{ backgroundImage: `url(${image21})` }}></div>
-      <div style={{ backgroundImage: `url(${image22})` }}></div>
-      <div style={{ backgroundImage: `url(${image23})` }}></div>
-      <div style={{ backgroundImage: `url(${image24})` }}></div>
-      <div style={{ backgroundImage: `url(${image25})` }}></div>
-      <div style={{ backgroundImage: `url(${image26})` }}></div>
-      <div style={{ backgroundImage: `url(${image27})` }}></div>
+      {images.map((image, index) => (
+        <img key={index} src={image} alt={`Image ${index + 1}`} />
+      ))}
     </div>
   );
 };

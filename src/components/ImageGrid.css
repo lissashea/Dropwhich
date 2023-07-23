@@ -1,12 +1,25 @@
-/* ImageGrid.css */
-
 .image-grid-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
-  grid-template-rows: repeat(5, 1fr); /* 5 rows */
   gap: 5px; /* Adjust the gap between images as desired */
   width: 100%;
-  height: 100vh; /* Adjust the height of the container as needed */
+  height: 100vh; /* Set the height to 100vh to cover the viewport height */
   background-color: white; /* Set a background color as a fallback */
+  overflow-y: hidden; /* Hide vertical scrollbar if needed */
+  padding: 5px; /* Optional: Add padding to adjust the spacing around images */
 }
 
+/* Rest of your existing CSS styles for .image-grid-container */
+
+.image-grid-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.image-grid-container img:hover {
+  transform: scale(1.1);
+}

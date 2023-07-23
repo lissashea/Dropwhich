@@ -30,4 +30,8 @@
   .navLink.signin {
     display: none;
   }
+
+  .navLink.review {
+    display: none;
+  }
 }
