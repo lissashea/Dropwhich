@@ -2,9 +2,13 @@
   background-color: #FC6238;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 20px 0;
   color: #FFD872;
   z-index: 8;
+  text-align: center;
+  height: 30px; /* Set a specific height for the container */
+
 }
 
 .navLink {

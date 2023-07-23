@@ -36,6 +36,12 @@
   }
 
   .footerContainer {
-    padding: 0;
+    padding: 20px 0;
+  }
+}
+
+@media (max-height: 500px) {
+  .footerContainer {
+    display: none;
   }
 }

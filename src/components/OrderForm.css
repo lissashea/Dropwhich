@@ -25,6 +25,7 @@
   /* z-index: 3; */
   background-color: rgba(242, 212, 204, 0.9);
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  
 }
 
 /* The order deadline countdown (on the right) */
@@ -194,3 +195,56 @@ label {
   }
 
 }
+
+/* Media query for small screens (e.g., mobile devices) */
+@media (max-width: 767px) {
+  /* Hide the countdown container on mobile */
+  .countdownContainer {
+    display: none;
+  }
+
+  /* Adjust the height for smaller screens */
+  .orderForm-container {
+    padding-top: 30px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  /* Show the orderDeadline text on mobile */
+  .orderDeadline {
+    display: none;
+  }
+
+  /* Adjust the layout of the form elements for smaller screens */
+  .orderForm-content {
+    font-size: 15px;
+    align-items: center;
+  }
+
+  .madLibInput {
+    width: 70%;
+    padding: 5px;
+    display: inline;
+  }
+
+  .dropdown {
+    width: 70%;
+    max-width: 300px;
+    padding: 5px;
+  }
+
+  .submitButton {
+    width: 100%; /* Set the width to fill the container on smaller screens */
+    margin-top: auto;
+  }
+
+  /* Reduce the font size of labels for a more compact look */
+  label {
+    font-size: 14px;
+  }
+}
+

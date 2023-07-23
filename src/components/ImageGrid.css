@@ -30,6 +30,9 @@
 /* Media query for smaller screens */
 @media (max-width: 767px) {
   .image-grid-container {
+    object-fit: cover;
+    height:100vh;
+    width: 100%;
     grid-template-columns: repeat(3, 1fr); /* Reduce the number of columns to 3 on smaller screens */
   }
 }
@@ -37,6 +40,8 @@
 /* Media query for even smaller screens */
 @media (max-width: 520px) {
   .image-grid-container {
+    height:100vh;
+    width: 100%;
     grid-template-columns: repeat(2, 1fr); /* Reduce the number of columns to 2 on even smaller screens */
   }
 }
