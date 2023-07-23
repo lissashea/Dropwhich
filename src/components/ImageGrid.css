@@ -3,7 +3,7 @@
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
   gap: 5px; /* Adjust the gap between images as desired */
   width: 100%;
-  height: 100vh; /* Set the height to 100vh to cover the viewport height */
+  height: 120vh; /* Set the height to 100vh to cover the viewport height */
   background-color: white; /* Set a background color as a fallback */
   overflow-y: hidden; /* Hide vertical scrollbar if needed */
   padding: 5px; /* Optional: Add padding to adjust the spacing around images */
@@ -22,4 +22,21 @@
 
 .image-grid-container img:hover {
   transform: scale(1.1);
+}
+
+
+
+
+/* Media query for smaller screens */
+@media (max-width: 767px) {
+  .image-grid-container {
+    grid-template-columns: repeat(3, 1fr); /* Reduce the number of columns to 3 on smaller screens */
+  }
+}
+
+/* Media query for even smaller screens */
+@media (max-width: 520px) {
+  .image-grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Reduce the number of columns to 2 on even smaller screens */
+  }
 }

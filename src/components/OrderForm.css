@@ -16,7 +16,8 @@
 
 .orderForm-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: 
+  space-between;
   margin-top: 25px;
   color: #6c88cf;
   border-radius: 15px;
@@ -112,8 +113,7 @@ label {
   font-weight: bold;
 }
 
-/* Media query for small screens (e.g., mobile devices) */
-@media (max-width: 767px) {
+/* Media query for small screens (e.g., mobile devices) */@media (max-width: 767px) {
   /* Hide the countdown container on mobile */
   .countdownContainer {
     display: none;
@@ -121,13 +121,13 @@ label {
 
   /* Adjust the height for smaller screens */
   .orderForm-container {
-    padding-bottom: 60px; /* Add padding to the bottom to make space for the footer */
-    padding-top:40px;
-    margin: auto;
+    padding-top:30px;
+    margin:auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 25px;
   }
 
   /* Show the orderDeadline text on mobile */
@@ -135,59 +135,29 @@ label {
     display: none;
   }
 
-  .orderForm-countdown {
-    display: none;
-  }
-
   /* Adjust the layout of the form elements for smaller screens */
-
   .orderForm-content {
     font-size: 15px;
     align-items: stretch; /* Stretch the form elements to fill the available width */
+    align-items: center;
   }
 
   .madLibInput {
     width: 100%;
-    max-width: 300px;
-    
+    padding: 5px;
+    display: inline;
   }
 
   .dropdown {
-    width: 100%;
+    width: 70%;
     max-width: 300px;
-  }
+    padding: 5px;
 
+  }
 
   .submitButton {
     width: 100%; /* Set the width to fill the container on smaller screens */
-  }
-
-}
-
-/* Media query for screens less than 1158px width and 671px height */
-@media (max-width: 1158px) and (max-height: 671px) {
-  .orderForm {
-    flex-direction: column; /* Change the direction to column */
-    align-items: center; /* Center the form elements vertically */
-  }
-
-  .madLibInput,
-  .submitButton {
-    width: 50%; /* Reset the width to fill the container on smaller screens */
-    /* max-width: 300px; Set a maximum width for better display on smaller screens */
-    margin-bottom: 10px; 
-  }
-
-  /* Show each label and input on its own row */
-  label {
-    display: block;
-    text-align: center;
-    margin-bottom: 15px; /* Add extra margin between labels and inputs */
-  }
-  
-  /* Add some margin below the form on smaller screens */
-  form {
-    margin-bottom: 40px;
+    margin-top: auto;
   }
 }
 
@@ -199,20 +169,19 @@ label {
   }
 
   .orderForm-container {
-    height: fit-content;
+    height: 100%;
   }
 
   .madLibInput,
   .submitButton {
-    width: 40%;
-    max-width: 200px;
-    margin-bottom: 15px;
+    width: 100%;
+    margin-bottom: 5px;
   }
 
   label {
-    display: block;
+    display: inline-flex;
     text-align: start;
-    margin-bottom: 0px;
+    font-size:15px;
   }
 
   form {

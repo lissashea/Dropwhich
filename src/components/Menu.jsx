@@ -18,22 +18,10 @@ function Menu({ imagesize }) {
         price: 10.99,
       },
       {
-        id: 2,
-        name: "Placeholder Sandwich 2",
-        description: "This is another placeholder sandwich.",
-        price: 12.99,
-      },
-      {
         id: 3,
         name: "Placeholder Side 1",
         description: "This is a placeholder side.",
         price: 4.99,
-      },
-      {
-        id: 4,
-        name: "Placeholder Side 2",
-        description: "This is another placeholder side.",
-        price: 3.99,
       },
     ];
 
@@ -54,7 +42,7 @@ function Menu({ imagesize }) {
               <span className="underline">Sandwich</span>
             </h2>
             {items
-              .filter((item) => item.id <= 2) // Filter out the sandwich items
+              .filter((item) => item.id === 1) // Filter out the desired sandwich item (ID 1)
               .map((item) => (
                 <div key={item.id}>
                   <h3>{item.name}</h3>
@@ -68,7 +56,7 @@ function Menu({ imagesize }) {
               <span className="underline">Side</span>
             </h2>
             {items
-              .filter((item) => item.id > 2) // Filter out the side items
+              .filter((item) => item.id === 3) // Filter out the desired side item (ID 3)
               .map((item) => (
                 <div key={item.id}>
                   <h3>{item.name}</h3>
@@ -96,3 +84,5 @@ function Menu({ imagesize }) {
 }
 
 export default Menu;
+
+
