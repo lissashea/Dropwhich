@@ -16,6 +16,9 @@ function Footer() {
         <p className="footerContact instagram">
           <span>Instagram:</span> @cathstable
         </p>
+        <p className="footerContact venmo">
+          <span>Venmo:</span> @cathstable
+        </p>
       </div>
     </footer>
   );
