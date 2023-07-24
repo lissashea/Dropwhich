@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react"; // Import useEffect and useState
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "./Reviews.css";
 import review1 from "../images-drop/review1.jpeg";
+import review2 from "../images-drop/review2.jpeg";
 
 const CustomPrevArrow = (props) => {
   const { className, onClick } = props;
@@ -46,56 +47,101 @@ const Reviews = () => {
     nextArrow: <CustomNextArrow />,
   };
 
+  const handleCardClick = () => {
+    // Trigger the slider to move to the next slide
+    slider.slickNext();
+  };
+
+  let slider; // Reference to the slider component
+
   return (
     <div className="reviews-container">
-      <Slider {...sliderSettings}>
-        <Card img={review1} />
-        <Card img={review1} />
-        <Card img={review1} />
+      <Slider ref={(c) => (slider = c)} {...sliderSettings}>
+        <Card img={review1} onClick={handleCardClick} />
+        <Card img={review2} onClick={handleCardClick} />
+        <Card img={review1} onClick={handleCardClick} />
       </Slider>
     </div>
   );
 };
 
-const Card = ({ img }) => {
+const Card = ({ img, onClick }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const checkIsMobile = () => {
+    setIsMobile(window.innerWidth <= 768); // You can adjust the breakpoint (768) to suit your needs
+  };
+
+  useEffect(() => {
+    // Add event listener to check for mobile screen size on mount
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkIsMobile);
+    };
+  }, []);
+
+  const handleImageClick = () => {
+    if (isMobile) {
+      onClick(); // Trigger the slider to move to the next slide
+    }
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        textAlign: "center",
-        zIndex: 3,
-        marginTop: "25px"
-      }}
-    >
-      <img
-        src={img}
-        alt="Review"
+    <a onClick={handleImageClick}>
+      {/* Use anchor tag with onClick to make the image clickable */}
+      <div
         style={{
-          width: "300px",
-          height: "600px",
-          border: "5px solid white",
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          textAlign: "center",
           zIndex: 3,
+          marginTop: "25px",
+          marginBottom: "0px",
         }}
-      />
-      <p style={{ fontStyle: "italic", marginTop: 25, backgroundColor:"FC6238",fontSize:"15px",color:"white", padding:25 }}>
-        the best sandwich ive ever had
-      </p>
-      <p>
-        <span
+      >
+        <img
+          src={img}
+          alt="Review"
           style={{
-            fontWeight: "500",
-            color: "orange",
+            width: "300px", // Use 100% to make it responsive
+            height: "60vh",
+            border: "5px solid white",
             zIndex: 3,
-            backgroundColor:"white"
+          }}
+          onClick={
+            onClick
+          } /* Add onClick to the img tag for non-mobile devices */
+        />
+        <p
+          style={{
+            fontStyle: "italic",
+            marginTop: 10,
+            backgroundColor: "#FC6238",
+            fontSize: "25px",
+            color: "white",
+            padding: 7,
+            borderRadius: 25,
           }}
         >
-          Lissa Warshaw{" "}
-        </span>
-        , Friend
-      </p>
-    </div>
+          "the best sandwich ive ever had"
+        </p>
+        <p style={{ backgroundColor: "#FC6238", color: "#FFD872" }}>
+          <span
+            style={{
+              fontWeight: "500",
+              color: "#FFD872",
+              zIndex: 3,
+              backgroundColor: "FC6238",
+            }}
+          >
+            Lissa Warshaw{" "}
+          </span>
+          , Friend
+        </p>
+      </div>
+    </a>
   );
 };
 

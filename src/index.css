@@ -19,7 +19,7 @@ body {
 
 /* Add letter-spacing to the entire body to space out characters */
 body {
-  letter-spacing: 2px; /* Adjust the value as needed */
+  letter-spacing: 3px; /* Adjust the value as needed */
 }
 
 .App {
