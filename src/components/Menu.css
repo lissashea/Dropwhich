@@ -79,10 +79,15 @@
     padding: 10px;
   }
 
+  .availability-text {
+    display: none;
+  }
+
   .menu-container {
     margin: auto;
     margin-top: 25px;
     padding: 10px;
+    max-width: 100%;
   }
 
   .menu-items {

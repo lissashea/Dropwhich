@@ -34,6 +34,9 @@
   .footerContact.instagram {
     display: none;
   }
+  .footerContact.venmo {
+    display: none;
+  }
 
   .footerContainer {
     padding: 20px 0;

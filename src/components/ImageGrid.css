@@ -6,7 +6,7 @@
   height: 120vh; /* Set the height to 100vh to cover the viewport height */
   background-color: white; /* Set a background color as a fallback */
   overflow-y: hidden; /* Hide vertical scrollbar if needed */
-  padding: 5px; /* Optional: Add padding to adjust the spacing around images */
+  /* padding: 5px; Optional: Add padding to adjust the spacing around images */
 }
 
 /* Rest of your existing CSS styles for .image-grid-container */
