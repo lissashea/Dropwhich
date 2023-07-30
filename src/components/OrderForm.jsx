@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
+import apiConfig from "../apiConfig/apiConfig";
+
 
 function OrderForm() {
   const [order, setOrder] = useState({
+    user: "", // Store the user ID associated with the order
     sandwich: "",
     side: "",
-    address: "",
+    sideSize: "", // Add sideSize field
+    total: 0, // Add total field
+    deliveryInstructions: "",
   });
+
+
+  const [users, setUsers] = useState([]); // To store the list of users
 
   const [orderSubmitted, setOrderSubmitted] = useState(false);
 
@@ -28,21 +36,26 @@ function OrderForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("/api/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(order),
-    }).then((response) => {
-      if (response.ok) {
-        setOrderSubmitted(true);
-      }
-    });
+    apiConfig.order.createOrder(order)
+      .then((response) => {
+        if (response.ok) {
+          setOrderSubmitted(true);
+        }
+      });
   };
-
-
-
+  useEffect(() => {
+    // Fetch the list of users when the component mounts
+    apiConfig.user.getAllUsers()
+      .then((response) => response.json())
+      .then((data) => {
+        setUsers(data);
+        if (data.length > 0) {
+          // Set the user ID for the first user as the default value in the form
+          setOrder((prevOrder) => ({ ...prevOrder, user: data[0]._id }));
+        }
+      });
+  }, []); // Empty dependency array to ensure it only runs once
+  
   return (
     <div className="orderForm">
       {orderSubmitted ? (
@@ -55,64 +68,75 @@ function OrderForm() {
           <div className="orderForm-content">
             <form onSubmit={handleSubmit}>
               <label>
+                User:
+                <select
+                  name="user"
+                  className="dropdown"
+                  onChange={handleChange}
+                  value={order.user}
+                >
+                  {users.map((user) => (
+                    <option key={user._id} value={user._id}>
+                      {user.username}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              {/* Sandwich selection */}
+              <label>
                 Sandwich:
                 <select
                   name="sandwich"
                   className="dropdown"
                   onChange={handleChange}
+                  value={order.sandwich}
                 >
-                  <option>Select a sandwich</option>
+                  <option value="">Select a sandwich</option>
                   <option value="sandwich1">Sandwich 1</option>
                   <option value="sandwich2">Sandwich 2</option>
                 </select>
               </label>
-  
+
               {/* Side selection */}
               <label>
                 Side:
-                <select name="side" className="dropdown" onChange={handleChange}>
-                  <option>Select a side</option>
+                <select
+                  name="side"
+                  className="dropdown"
+                  onChange={handleChange}
+                  value={order.side}
+                >
+                  <option value="">Select a side</option>
                   <option value="side1">Side 1</option>
                   <option value="side2">Side 2</option>
                 </select>
               </label>
-  
-              {/* Name input */}
+
+              {/* Side Size input */}
               <label>
-                Name:
+                Side Size:
                 <input
                   type="text"
-                  name="name"
+                  name="sideSize"
                   className="madLibInput"
-                  value={order.name}
+                  value={order.sideSize}
                   onChange={handleChange}
                 />
               </label>
-  
-              {/* Phone number input */}
+
+              {/* Total input */}
               <label>
-                Phone Number:
+                Total:
                 <input
-                  type="text"
-                  name="phone"
+                  type="number"
+                  name="total"
                   className="madLibInput"
-                  value={order.phone}
+                  value={order.total}
                   onChange={handleChange}
                 />
               </label>
-  
-              {/* Address input */}
-              <label>
-                Address:
-                <input
-                  type="text"
-                  name="address"
-                  className="madLibInput"
-                  value={order.address}
-                  onChange={handleChange}
-                />
-              </label>
-  
+
               {/* Delivery instructions input */}
               <label>
                 Delivery Instructions:
@@ -123,7 +147,6 @@ function OrderForm() {
                   onChange={handleChange}
                 />
               </label>
-  
               <button type="submit" className="submitButton">
                 Submit
               </button>
@@ -139,6 +162,5 @@ function OrderForm() {
     </div>
   );
 }
-
 
 export default OrderForm;
