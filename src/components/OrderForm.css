@@ -1,3 +1,41 @@
+.confirmationMessage {
+  margin-top: 20px;
+  padding: 20px;
+  color: #6c88cf;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: rgba(242, 212, 204, 0.9);
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.confirmationMessage p {
+  margin: 10px 0;
+}
+
+.confirmationMessage button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6c88cf;
+  color: #ea479e;
+  cursor: pointer;
+  font-family: 'Genty', 'Comic Sans MS', cursive, sans-serif;
+  font-size: 18px;
+  text-decoration: none; /* Remove underline from the button text */
+  transition: all 0.2s ease; /* Add a smooth transition effect on hover */
+  /* Add 3D effect */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.confirmationMessage button:hover {
+  background-color: #f2d4cc;
+  color: #6c88cf;
+  /* Add 3D effect on hover */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+
 .orderForm {
   display: flex;
   flex-direction: column;

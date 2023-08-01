@@ -3,8 +3,8 @@ import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
 import apiConfig from "../apiConfig/apiConfig";
 
-
 function OrderForm() {
+  const [venmoConfirmed, setVenmoConfirmed] = useState(false);
   const [order, setOrder] = useState({
     user: "", // Store the user ID associated with the order
     sandwich: "",
@@ -14,10 +14,18 @@ function OrderForm() {
     deliveryInstructions: "",
   });
 
+  const sandwichBasePrice = 15;
+  const sideSmallPrice = 4.5;
+  const sideLargePrice = 5;
+  const gfPrice = 1;
 
   const [users, setUsers] = useState([]); // To store the list of users
-
   const [orderSubmitted, setOrderSubmitted] = useState(false);
+
+  const handleVenmoConfirmation = () => {
+    // This function is called when the user confirms payment via Venmo.
+    setVenmoConfirmed(true);
+  };
 
   const getNextTuesday = () => {
     const now = new Date();
@@ -29,23 +37,38 @@ function OrderForm() {
   };
 
   const targetDate = getNextTuesday();
-
   const handleChange = (event) => {
-    setOrder({ ...order, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+
+    // Calculate the total based on sandwich and side selections
+    let total = order.total; // Initialize with the existing total
+
+    if (name === "sandwich") {
+      total = sandwichBasePrice;
+      if (value === "sandwich3") {
+        total += gfPrice;
+      }
+    } else if (name === "side") {
+      total += value === "size side" ? sideSmallPrice : sideLargePrice;
+    }
+
+    // Update the order state
+    setOrder({ ...order, [name]: value, total });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    apiConfig.order.createOrder(order)
-      .then((response) => {
-        if (response.ok) {
-          setOrderSubmitted(true);
-        }
-      });
+    apiConfig.order.createOrder(order).then((response) => {
+      if (response.ok) {
+        setOrderSubmitted(true);
+      }
+    });
   };
+
   useEffect(() => {
     // Fetch the list of users when the component mounts
-    apiConfig.user.getAllUsers()
+    apiConfig.user
+      .getAllUsers()
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
@@ -55,13 +78,30 @@ function OrderForm() {
         }
       });
   }, []); // Empty dependency array to ensure it only runs once
-  
   return (
     <div className="orderForm">
       {orderSubmitted ? (
         <div className="confirmationMessage">
-          <p>Order submitted successfully!</p>
-          <p>Thank you for your order.</p>
+          {venmoConfirmed ? (
+            <div>
+              <p>Order received! Your order is confirmed.</p>
+              <p>Thank you for your payment via Venmo.</p>
+              <p>Total amount: ${order.total}</p>{" "}
+              {/* Add the total amount here */}
+            </div>
+          ) : (
+            <div>
+              <p>
+                Order received! Please confirm your order by paying the total
+                amount via Venmo to @cathgreen13.
+              </p>
+              <p>Total amount: ${order.total}</p>{" "}
+              {/* Add the total amount here */}
+              <button onClick={handleVenmoConfirmation}>
+                I've paid via Venmo
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="orderForm-container">
@@ -93,8 +133,9 @@ function OrderForm() {
                   value={order.sandwich}
                 >
                   <option value="">Select a sandwich</option>
-                  <option value="sandwich1">Sandwich 1</option>
-                  <option value="sandwich2">Sandwich 2</option>
+                  <option value="sandwich1">Sandwich as God intended</option>
+                  <option value="sandwich2">Sandwich made vegan</option>
+                  <option value="sandwich3">Sandwich with GF bread</option>
                 </select>
               </label>
 
@@ -108,21 +149,9 @@ function OrderForm() {
                   value={order.side}
                 >
                   <option value="">Select a side</option>
-                  <option value="side1">Side 1</option>
-                  <option value="side2">Side 2</option>
+                  <option value="size side">Small</option>
+                  <option value="size side">Large</option>
                 </select>
-              </label>
-
-              {/* Side Size input */}
-              <label>
-                Side Size:
-                <input
-                  type="text"
-                  name="sideSize"
-                  className="madLibInput"
-                  value={order.sideSize}
-                  onChange={handleChange}
-                />
               </label>
 
               {/* Total input */}
@@ -134,6 +163,7 @@ function OrderForm() {
                   className="madLibInput"
                   value={order.total}
                   onChange={handleChange}
+                  readOnly // To prevent user input on the total field
                 />
               </label>
 
