@@ -66,23 +66,21 @@ function Menu({ imagesize }) {
               ))}
           </div>
         </div>
-        <p className="availability-text">Available until {new Date().toLocaleDateString()}</p>
+        <p className="availability-text">
+          Available until {new Date().toLocaleDateString()}
+        </p>
         <button onClick={goToOrderForm} className="order-button">
           Order Here
         </button>
-        <div className="menu-image">
-          {/* Apply the 'menu-image' class to the 'img' element */}
+        {/* <div className="menu-image"> */}
           {/* <img
           src={sandwichImage}
           alt="Delicious Sandwich"
           style={{ width: "100px", height: "auto" }}
         /> */}
         </div>
-      </div>
     </>
   );
 }
 
 export default Menu;
-
-

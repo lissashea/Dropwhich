@@ -16,6 +16,7 @@ import SignIn from "./components/SignIn.jsx";
 import Footer from "./components/Footer.jsx";
 import Reviews from "./components/Reviews.jsx";
 import ImageGrid from "./components/ImageGrid"; // Import the ImageGrid component
+import Profile from "./components/Profile.jsx";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         </div>
         <Routes>
           <Route path="/" element={<Home imageSize="100px" />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/order" element={<OrderForm />} />
           <Route path="/faq" element={<Faq />} />

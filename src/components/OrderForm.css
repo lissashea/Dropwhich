@@ -20,7 +20,7 @@
   background-color: #6c88cf;
   color: #ea479e;
   cursor: pointer;
-  font-family: 'Genty', 'Comic Sans MS', cursive, sans-serif;
+  font-family: "Genty", "Comic Sans MS", cursive, sans-serif;
   font-size: 18px;
   text-decoration: none; /* Remove underline from the button text */
   transition: all 0.2s ease; /* Add a smooth transition effect on hover */
@@ -35,14 +35,13 @@
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-
 .orderForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 25px;
-  color: #6C88CF;
-  z-index: 1; 
+  color: #6c88cf;
+  z-index: 1;
 }
 
 .orderForm-content {
@@ -54,8 +53,7 @@
 
 .orderForm-container {
   display: flex;
-  justify-content: 
-  space-between;
+  justify-content: space-between;
   margin-top: 25px;
   color: #6c88cf;
   border-radius: 15px;
@@ -63,7 +61,6 @@
   /* z-index: 3; */
   background-color: rgba(242, 212, 204, 0.9);
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  
 }
 
 /* The order deadline countdown (on the right) */
@@ -75,16 +72,14 @@
   align-items: center;
 }
 
-
 .orderDeadline {
   animation: pulse 2s infinite;
 }
 
-
 @keyframes pulse {
   50% {
     color: #ea479e; /* Start with red color */
-  } 
+  }
 
   50% {
     color: #00ff00; /* Transition to green color */
@@ -95,27 +90,27 @@
 }
 
 .dropdown {
-padding:10px;
-border-radius: 10px;
-border:solid #ea479e;
-width:40%;
-margin-left:15px;
-text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid #ea479e;
+  width: 40%;
+  margin-left: 15px;
+  text-align: center;
 }
 
 label {
   display: block; /* Display the labels as blocks to stack them vertically */
   text-align: left;
   margin-bottom: 10px;
-  padding:10px;
+  padding: 10px;
 }
 
 .madLibInput {
-  width:35%;
-  margin-left:15px;
+  width: 35%;
+  margin-left: 15px;
   padding: 10px;
   margin-bottom: 20px;
-  border:solid #ea479e;
+  border: solid #ea479e;
   border-radius: 10px;
   background-color: #f5f5f5;
 }
@@ -126,10 +121,10 @@ label {
   margin-bottom: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #6C88CF;
+  background-color: #6c88cf;
   color: #ea479e;
   cursor: pointer;
-  font-family: 'Genty', 'Comic Sans MS', cursive, sans-serif;
+  font-family: "Genty", "Comic Sans MS", cursive, sans-serif;
   font-size: 25px;
   text-decoration: none; /* Remove underline from the button text */
   transition: all 0.2s ease; /* Add a smooth transition effect on hover */
@@ -138,8 +133,8 @@ label {
 }
 
 .submitButton:hover {
-  background-color: #F2D4CC;
-  color: #6C88CF;
+  background-color: #f2d4cc;
+  color: #6c88cf;
   /* Add 3D effect on hover */
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
@@ -152,7 +147,8 @@ label {
   font-weight: bold;
 }
 
-/* Media query for small screens (e.g., mobile devices) */@media (max-width: 767px) {
+/* Media query for small screens (e.g., mobile devices) */
+@media (max-width: 767px) {
   /* Hide the countdown container on mobile */
   .countdownContainer {
     display: none;
@@ -160,8 +156,8 @@ label {
 
   /* Adjust the height for smaller screens */
   .orderForm-container {
-    padding-top:30px;
-    margin:auto;
+    padding-top: 30px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -191,7 +187,6 @@ label {
     width: 70%;
     max-width: 300px;
     padding: 5px;
-
   }
 
   .submitButton {
@@ -220,7 +215,7 @@ label {
   label {
     display: inline-flex;
     text-align: start;
-    font-size:15px;
+    font-size: 15px;
   }
 
   form {
@@ -231,7 +226,6 @@ label {
   .submitButton {
     width: 100%; /* Set the width to fill the container on smaller screens */
   }
-
 }
 
 /* Media query for small screens (e.g., mobile devices) */
@@ -285,4 +279,3 @@ label {
     font-size: 14px;
   }
 }
-

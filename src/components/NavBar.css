@@ -35,6 +35,10 @@
     display: none;
   }
 
+  .navLink.signup {
+    display: none;
+  }
+
   .navLink.review {
     display: none;
   }

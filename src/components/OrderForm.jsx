@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
-import apiConfig from "../apiConfig/apiConfig";
+import apiConfig from "../apiConfig/apiConfig.js";
 
 function OrderForm() {
   const [venmoConfirmed, setVenmoConfirmed] = useState(false);
@@ -14,13 +14,16 @@ function OrderForm() {
     deliveryInstructions: "",
   });
 
+  const [orderSubmitted, setOrderSubmitted] = useState(false); // Define orderSubmitted state
+  const [currentUser, setCurrentUser] = useState(null); // Store the authenticated user's information
+
   const sandwichBasePrice = 15;
   const sideSmallPrice = 4.5;
   const sideLargePrice = 5;
   const gfPrice = 1;
 
-  const [users, setUsers] = useState([]); // To store the list of users
-  const [orderSubmitted, setOrderSubmitted] = useState(false);
+  // Your authentication check logic, you can replace this with your actual authentication system
+  const isAuthenticated = true; // Replace this with your authentication check logic
 
   const handleVenmoConfirmation = () => {
     // This function is called when the user confirms payment via Venmo.
@@ -37,6 +40,7 @@ function OrderForm() {
   };
 
   const targetDate = getNextTuesday();
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -58,26 +62,26 @@ function OrderForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    apiConfig.order.createOrder(order).then((response) => {
-      if (response.ok) {
-        setOrderSubmitted(true);
-      }
-    });
+    // Use the authenticated user's ID as the user associated with the order
+    if (currentUser) {
+      order.user = currentUser._id;
+      apiConfig.order.createOrder(order).then((response) => {
+        if (response.ok) {
+          setOrderSubmitted(true);
+        }
+      });
+    }
   };
 
   useEffect(() => {
-    // Fetch the list of users when the component mounts
-    apiConfig.user
-      .getAllUsers()
-      .then((response) => response.json())
-      .then((data) => {
-        setUsers(data);
-        if (data.length > 0) {
-          // Set the user ID for the first user as the default value in the form
-          setOrder((prevOrder) => ({ ...prevOrder, user: data[0]._id }));
-        }
+    // Fetch the authenticated user's information when the component mounts
+    if (isAuthenticated) {
+      // Replace with your authentication logic to get the authenticated user's information
+      apiConfig.user.getAuthenticatedUser().then((response) => {
+        setCurrentUser(response.data); // Assuming response.data contains the authenticated user's information
       });
-  }, []); // Empty dependency array to ensure it only runs once
+    }
+  }, [isAuthenticated]); // Fetch the authenticated user's information whenever the isAuthenticated state changes  // Empty dependency array to ensure it only runs once
   return (
     <div className="orderForm">
       {orderSubmitted ? (
@@ -113,16 +117,15 @@ function OrderForm() {
                   name="user"
                   className="dropdown"
                   onChange={handleChange}
-                  value={order.user}
+                  value={order.user || (currentUser ? currentUser._id : "")}
                 >
-                  {users.map((user) => (
-                    <option key={user._id} value={user._id}>
-                      {user.username}
+                  {currentUser && ( // Check if currentUser exists before mapping
+                    <option key={currentUser._id} value={currentUser._id}>
+                      {currentUser.username}
                     </option>
-                  ))}
+                  )}
                 </select>
               </label>
-
               {/* Sandwich selection */}
               <label>
                 Sandwich:
