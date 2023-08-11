@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
-import apiConfig from "../apiConfig/apiConfig.js";
+import apiConfig from '../apiConfig/apiConfig.js';
 
-function OrderForm({ user }) {
+
+function OrderForm({ user, token }) {
   const [venmoConfirmed, setVenmoConfirmed] = useState(false);
   const [order, setOrder] = useState({
     user: "", // Store the user ID associated with the order
@@ -73,16 +74,18 @@ function OrderForm({ user }) {
 
   useEffect(() => {
     if (token) {
-      apiConfig.user.getUserByToken(token)
-        .then(data => {
+      apiConfig.user
+        .getUserByToken(token)
+        .then((data) => {
+          console.log("User received from API:", data.user);
           setCurrentUser(data.user);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Failed to fetch user by token:", error);
         });
     }
   }, [token]);
-    
+
   return (
     <div className="orderForm">
       {orderSubmitted ? (

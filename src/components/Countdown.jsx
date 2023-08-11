@@ -3,6 +3,7 @@ import "./Countdown.css";
 
 function Countdown({ targetDate }) {
   const [timeLeft, setTimeLeft] = useState({});
+  // eslint-disable-next-line no-unused-vars
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
 
   useEffect(() => {
@@ -36,8 +37,10 @@ function Countdown({ targetDate }) {
 
   return (
     <div className="countdownContainer">
-      <p className="countdownText">
-      <h2>Order Countdown:</h2>
+      <h2 className="countdownText">
+        Order Countdown:
+      </h2>
+      <p>
         {timeLeft.days} {timeLeft.days === 1 ? "Day" : "Days"}{" "}
         {timeLeft.hours} Hours {timeLeft.minutes} Minutes{" "}
         {timeLeft.seconds} Seconds

@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: 'Genty';
-  src: url('./genty/GentyDemo-Regular.otf') format('opentype'),
-       url('./genty/GentyDemo-Regular.ttf') format('truetype');
+  src: url('./styling/GentyDemo-Regular.otf') format('opentype'),
+       url('./styling/GentyDemo-Regular.ttf') format('truetype');
   /* Add any other desired font properties, such as font-weight and font-style */
 }
 

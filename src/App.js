@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
+import jwtDecode from "jwt-decode";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Route, Routes } from "react-router-dom";
@@ -18,46 +19,62 @@ import Reviews from "./components/Reviews.jsx";
 import ImageGrid from "./components/ImageGrid"; // Import the ImageGrid component
 import Profile from "./components/Profile.jsx";
 import { getUser } from "./apiConfig/apiConfig.js";
+import { useAuth } from "./apiConfig/authContent.js";
 import { AuthProvider } from "./apiConfig/authContent.js";
-
 function App() {
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const user = await getUser(); // If getUser requires the userId from the token, you'll need to decode the token to get it.
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
   return (
     <div className="App">
       <AuthProvider>
-        <Navbar />
-        <div className="backgroundContainer">{<ImageGrid />}</div>
-        <Routes>
-          <Route path="/" element={<Home imageSize={"100px"} />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signout" element={<SignOut />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/order" element={<OrderForm token={localStorage.getItem('token')} />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/confirmation" element={<Confirmation />} />
-          <Route path="/reviews" element={<Reviews />} />
-        </Routes>
-        <Footer />
+        <AppContent />
       </AuthProvider>
     </div>
   );
 }
 
+function AppContent() {
+  const { setCurrentUser } = useAuth();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.userId; // Adjust depending on the actual structure of your token
+    
+        if (userId) {
+          const user = await getUser(userId);
+          setCurrentUser(user);
+        } else {
+          console.error('UserId not found in token');
+          setCurrentUser(null);
+        }
+      } else {
+        setCurrentUser(null);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  return (
+    <>
+      <Navbar />
+      <div className="backgroundContainer">{<ImageGrid />}</div>
+      <Routes>
+        <Route path="/" element={<Home imageSize={"100px"} />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signout" element={<SignOut />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/order" element={<OrderForm token={localStorage.getItem('token')} />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/reviews" element={<Reviews />} />
+      </Routes>
+      <Footer />
+    </>
+  );
+}
+
 export default App;
+

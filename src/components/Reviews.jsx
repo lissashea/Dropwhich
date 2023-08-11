@@ -3,8 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "./Reviews.css";
-import review1 from "../images-drop/review1.jpeg";
-import review2 from "../images-drop/review2.jpeg";
+import review1 from "../styling/review1.jpeg";
+import review2 from "../styling/review2.jpeg";
 
 const CustomPrevArrow = (props) => {
   const { className, onClick } = props;
@@ -88,7 +88,7 @@ const Card = ({ img, onClick }) => {
   };
 
   return (
-    <a onClick={handleImageClick}>
+    <div onClick={handleImageClick} role="button" tabIndex="0">
       {/* Use anchor tag with onClick to make the image clickable */}
       <div
         style={{
@@ -141,7 +141,7 @@ const Card = ({ img, onClick }) => {
           , Friend
         </p>
       </div>
-    </a>
+    </div>
   );
 };
 

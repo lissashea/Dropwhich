@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css"; // Update the CSS file import if needed
-import sandwichImage from "../images-drop/sandwich-transparent.png";
+import sandwichImage from "../styling/sandwich-transparent.png";
 
 const Home = ({ imageSize }) => {
   return (
