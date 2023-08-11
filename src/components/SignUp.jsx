@@ -19,7 +19,7 @@ function Signup() {
       [name]: value,
     }));
   };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -43,10 +43,10 @@ function Signup() {
     <div className="signup-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
+      <label>
+          Username:
           <input
-            type="text"
+            type="username"
             name="username"
             value={formData.username}
             onChange={handleChange}

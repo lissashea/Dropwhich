@@ -1,38 +1,164 @@
 import React, { useState, useEffect } from "react";
 import apiConfig from "../apiConfig/apiConfig.js";
+import "./Profile.css";
 
 function Profile() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    name: "",
+    street: "",
+    city: "",
+    zipCode: "",
+    phone: "",
+    email: "",
+    allergies: [],
+  });
   useEffect(() => {
-    // Fetch the authenticated user's profile information when the component mounts
-    apiConfig.user
-      .getProfile()
-      .then((userData) => {
-        setUser(userData);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-        setIsLoading(false);
-      });
-  }, []);
+    const userData = apiConfig.user.getCurrentUser();
+    if (userData && userData.profile) {
+      setUser(userData);
+      setFormData(userData.profile); // Grab the nested profile for formData
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+}, []);
 
+
+  const handleEditModeToggle = () => {
+    setEditMode(!editMode);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const updatedData = {
+        profile: formData
+      };
+  
+      const updatedUser = await apiConfig.user.updateUser(user._id, updatedData);
+      console.log("Updated user data:", updatedUser);
+  
+      setUser(updatedUser);  // Update user at App level
+      setEditMode(false);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+  
   return (
-    <div>
+    <div className="profile-container">
       <h2>Profile</h2>
       {isLoading ? (
         <p>Loading user data...</p>
       ) : user ? (
         <div>
-          <p>Name: {user.username}</p>
-          <p>Street: {user.street}</p>
-          <p>City: {user.city}</p>
-          <p>Zip Code: {user.zipCode}</p>
-          <p>Phone: {user.phone}</p>
-          <p>Email: {user.email}</p>
-          <p>Allergies: {user.allergies ? user.allergies.join(", ") : "None"}</p>
+          {editMode ? (
+            <form onSubmit={handleSubmit}>
+              <p>
+                Name:
+                <input
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                />
+              </p>
+              <p>
+                Street:
+                <input
+                  type="text"
+                  name="street"
+                  value={formData.street}
+                  onChange={handleInputChange}
+                />
+              </p>
+              <p>
+                City:
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                />
+              </p>
+              <p>
+                Zip Code:
+                <input
+                  type="text"
+                  name="zipCode"
+                  value={formData.zipCode}
+                  onChange={handleInputChange}
+                />
+              </p>
+              <p>
+                Phone:
+                <input
+                  type="text"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                />
+              </p>
+              <p>
+                Email:
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+              </p>
+              <p>
+                Allergies (comma-separated):
+                <input
+                  type="text"
+                  name="allergies"
+                  value={
+                    Array.isArray(formData.allergies)
+                      ? formData.allergies.join(", ")
+                      : ""
+                  }
+                  onChange={handleInputChange}
+                />
+              </p>
+
+              <div>
+                <button type="submit">Save</button>
+                <button type="button" onClick={handleEditModeToggle}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div>
+              <p>Name: {user.username}</p>
+              <p>Street: {user.street}</p>
+              <p>City: {user.city}</p>
+              <p>Zip Code: {user.zipCode}</p>
+              <p>Phone: {user.phone}</p>
+              <p>Email: {user.email}</p>
+              <p>
+              Allergies (comma-separated):{" "}
+              {user.allergies ? user.allergies.join(", ") : ""}
+            </p>
+              <button type="button" onClick={handleEditModeToggle}>
+                Edit Profile
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <p>No user data found.</p>

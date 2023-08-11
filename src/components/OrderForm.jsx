@@ -3,7 +3,7 @@ import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
 import apiConfig from "../apiConfig/apiConfig.js";
 
-function OrderForm() {
+function OrderForm({ user }) {
   const [venmoConfirmed, setVenmoConfirmed] = useState(false);
   const [order, setOrder] = useState({
     user: "", // Store the user ID associated with the order
@@ -21,9 +21,6 @@ function OrderForm() {
   const sideSmallPrice = 4.5;
   const sideLargePrice = 5;
   const gfPrice = 1;
-
-  // Your authentication check logic, you can replace this with your actual authentication system
-  const isAuthenticated = true; // Replace this with your authentication check logic
 
   const handleVenmoConfirmation = () => {
     // This function is called when the user confirms payment via Venmo.
@@ -59,13 +56,14 @@ function OrderForm() {
     // Update the order state
     setOrder({ ...order, [name]: value, total });
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Use the authenticated user's ID as the user associated with the order
     if (currentUser) {
-      order.user = currentUser._id;
-      apiConfig.order.createOrder(order).then((response) => {
+      const updatedOrder = {
+        ...order,
+        user: currentUser._id, // Assign the authenticated user's ID to the order
+      };
+      apiConfig.order.createOrder(updatedOrder).then((response) => {
         if (response.ok) {
           setOrderSubmitted(true);
         }
@@ -74,14 +72,17 @@ function OrderForm() {
   };
 
   useEffect(() => {
-    // Fetch the authenticated user's information when the component mounts
-    if (isAuthenticated) {
-      // Replace with your authentication logic to get the authenticated user's information
-      apiConfig.user.getAuthenticatedUser().then((response) => {
-        setCurrentUser(response.data); // Assuming response.data contains the authenticated user's information
-      });
+    if (token) {
+      apiConfig.user.getUserByToken(token)
+        .then(data => {
+          setCurrentUser(data.user);
+        })
+        .catch(error => {
+          console.error("Failed to fetch user by token:", error);
+        });
     }
-  }, [isAuthenticated]); // Fetch the authenticated user's information whenever the isAuthenticated state changes  // Empty dependency array to ensure it only runs once
+  }, [token]);
+    
   return (
     <div className="orderForm">
       {orderSubmitted ? (
@@ -112,19 +113,7 @@ function OrderForm() {
           <div className="orderForm-content">
             <form onSubmit={handleSubmit}>
               <label>
-                User:
-                <select
-                  name="user"
-                  className="dropdown"
-                  onChange={handleChange}
-                  value={order.user || (currentUser ? currentUser._id : "")}
-                >
-                  {currentUser && ( // Check if currentUser exists before mapping
-                    <option key={currentUser._id} value={currentUser._id}>
-                      {currentUser.username}
-                    </option>
-                  )}
-                </select>
+                User: {currentUser ? currentUser.username : "Guest"}
               </label>
               {/* Sandwich selection */}
               <label>

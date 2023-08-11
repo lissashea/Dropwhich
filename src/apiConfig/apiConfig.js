@@ -1,63 +1,114 @@
-const BASE_URL = 'http://localhost:4000/api'; // Replace this with your backend URL
+import axios from 'axios';
+const BASE_URL = "http://localhost:4000/api"; // Replace this with your backend URL
+
+let currentUser = null;
+let currentToken = null;
+let currentId = null;
+
 const apiConfig = {
   user: {
-    signUp: (userData) => fetch(`${BASE_URL}/users/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    }), // POST request for user sign-up
-    getAuthenticatedUser: async () => {
+    signUp: async (userData) => {
       try {
-        // Perform an API call to fetch the authenticated user's information
-        const response = await fetch(`${BASE_URL}/user`);
-        const data = await response.json();
-        console.log(data); // Check the response data in the console
+        const { data } = await axios.post(`${BASE_URL}/users/signup`, userData);
         return data;
       } catch (error) {
-        console.error("Error occurred during API call:", error);
-        throw error;
+        throw error.response.data;
       }
-    },    
-    getAllUsers: () => fetch(`${BASE_URL}/users`), // GET request for getting all users
-    createUser: (userData) => fetch(`${BASE_URL}/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    }), // POST request for creating a new user
-    getUser: (userId) => fetch(`${BASE_URL}/users/${userId}`), // GET request for getting a single user by ID
-    updateUser: (userId, userData) => fetch(`${BASE_URL}/users/${userId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    }), // PUT request for updating a user by ID
-    deleteUser: (userId) => fetch(`${BASE_URL}/users/${userId}`, {
-      method: 'DELETE',
-    }), // DELETE request for deleting a user by ID
-    getProfile: async () => {
-      // Perform an API call to fetch the authenticated user's profile information
-      // For example, if you are using fetch:
-      const response = await fetch(`${BASE_URL}/profile`); // Replace "/profile" with the appropriate API endpoint for fetching user profiles
-      const data = await response.json();
+    },
+
+    signIn: async (credentials) => {
+      try {
+        const { data } = await axios.post(`${BASE_URL}/users/signin`, credentials);
+        
+        localStorage.setItem('token', data.token);
+
+        if (data.token && data.user) {
+          currentToken = data.token;
+          currentUser = data.user;
+          currentId = data.user._id;
+        }
+        
+        return data;
+      } catch (error) {
+        throw error.response.data;
+      }
+    },
+
+    signOut: async () => {
+      localStorage.removeItem("token");
+      currentUser = null;
+      currentToken = null;
+      currentId = null;
+    },
+
+    getCurrentUser: () => currentUser,
+    getToken: () => currentToken,
+    getId: () => currentId,
+
+    getAuthenticatedUser: async () => {
+      if (!currentUser || !currentUser._id) {
+        throw new Error("User not authenticated");
+      }
+      
+      try {
+        const { data } = await axios.get(`${BASE_URL}/users/${currentUser._id}`);
+        return data;
+      } catch (error) {
+        throw error.response.data;
+      }
+    },
+
+    getAllUsers: async () => {
+      const { data } = await axios.get(`${BASE_URL}/users`);
       return data;
     },
-    // ... other user functions ...
+
+  //   createUser: async (userData) => {
+  //     const { data } = await axios.post(`${BASE_URL}/users`, userData);
+  //     console.log(data);  // Log the data to check its structure
+  //     return data;
+  // },  
+  
+
+  getUser: async (userId) => {
+    if (!userId) {
+        throw new Error('UserId is undefined or not provided');
+    }
+    const { data } = await axios.get(`${BASE_URL}/users/${userId}`);
+    return data;
+},
+  
+
+    updateUser: async (userId, userData) => {
+      const { data } = await axios.put(`${BASE_URL}/users/${userId}`, userData, {
+        headers: {
+          "Authorization": `Bearer ${currentToken}`
+        }
+      });
+      return data;
+    },
+
+    deleteUser: async (userId) => {
+      const { data } = await axios.delete(`${BASE_URL}/users/${userId}`);
+      return data;
+    }
   },
+
   order: {
-    getAllOrders: () => fetch(`${BASE_URL}/orders`), // GET request for getting all orders
-    createOrder: (orderData) => fetch(`${BASE_URL}/orders`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(orderData),
-    }), // POST request for creating a new order
+    getAllOrders: () => fetch(`${BASE_URL}/orders`),
+    createOrder: (orderData) =>
+      fetch(`${BASE_URL}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      }),
   },
 };
 
+export const signIn = apiConfig.user.signIn;
+export const getUser = apiConfig.user.getUser;
+export const signOut = apiConfig.user.signOut;
 export default apiConfig;
+

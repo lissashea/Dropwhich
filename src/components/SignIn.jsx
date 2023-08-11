@@ -1,68 +1,85 @@
 import React, { useState } from "react";
-import "./SignIn.css"; // Import the CSS file
-import apiConfig from "../apiConfig/apiConfig"; // Import your API configuration
+import "./SignIn.css";
+import { signIn, getUser } from "../apiConfig/apiConfig.js";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../apiConfig/authContent.js";
 
-function SignIn() {
-  const [formData, setFormData] = useState({
+const SignIn = () => {
+  const { currentUser, setCurrentUser, token, setToken, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    username: "",
     email: "",
     password: "",
   });
 
+  const [isError, setIsError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (event) => {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  }
+  
+  const onSignIn = async (event) => {
     event.preventDefault();
-
     try {
-      const response = await apiConfig.user.signIn({
-        email: formData.email,
-        password: formData.password,
-      });
-
-      if (response.ok) {
-        // Handle successful login, e.g., store token and redirect
-        console.log("Login successful!");
-      } else {
-        // Handle login failure
-        console.error("Login failed:", response.status, response.statusText);
-      }
+      const data = await signIn(form);
+      setCurrentUser(data.user);
+      navigate('/profile');
     } catch (error) {
-      console.error("Error occurred during login:", error.message);
+      console.error(error);
+      setIsError(true);
+      setErrorMsg("Incorrect username and/or password. Try again.");
     }
   };
+  
 
   return (
     <div className="signin-container">
       <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
+      {isError && <p>{errorMsg}</p>}
+      <form onSubmit={onSignIn}>
+        <label>
+          Username:
+          <input
+            type="text"
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
         <label>
           Email:
           <input
             type="email"
             name="email"
-            value={formData.email}
+            value={form.email}
             onChange={handleChange}
+            required
           />
         </label>
+
         <label>
           Password:
           <input
             type="password"
             name="password"
-            value={formData.password}
+            value={form.password}
             onChange={handleChange}
+            required
           />
         </label>
-        <button type="submit">Login</button>
+
+        <button type="submit">Sign In</button>
       </form>
     </div>
   );
-}
+};
 
 export default SignIn;
