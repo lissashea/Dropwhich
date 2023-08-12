@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import "./SignUp.css"; // Import the CSS file
-import apiConfig from "../apiConfig/apiConfig";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
-import { useAuth } from "../apiConfig/authContent.js"; // Import the useAuth hook
+import "./SignUp.css";
+import { signUp } from "../apiConfig/apiConfig"; // Directly import the signUp function
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../apiConfig/authContent.js";
 
 function Signup() {
-  const navigate = useNavigate(); // Initialize the navigate function
-  const { setToken, setCurrentUser } = useAuth(); // Use the useAuth hook to get setToken and setCurrentUser
+  const { setCurrentUser } = useAuth();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
   });
+
+  const [isError, setIsError] = useState(false); // For handling errors
+  const [errorMsg, setErrorMsg] = useState(""); // For displaying error messages
 
   const handleChange = (event) => {
     setForm({
@@ -24,39 +27,42 @@ function Signup() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Assuming signUp is a method in apiConfig.user (this needs to be confirmed)
-      const data = await apiConfig.user.signUp(form);
+      const data = await signUp(form); // Use the directly imported signUp function
       if (data && data.token) {
         console.log("Signup successful!");
-        // Logging the user id after signup
         if (data.user && data.user._id) {
           console.log("User ID:", data.user._id);
         } else if (data.user && data.user.id) {
           console.log("User ID:", data.user.id);
         }
 
-        setToken(data.token); // Save the token to the context
-        setCurrentUser(data.user); // Save the user details to the context
-        navigate("/profile"); // Use navigate to redirect to the profile page
+        // setToken(data.token);
+        setCurrentUser(data.user);
+        navigate("/profile");
       } else {
-        // Handle signup failure
-        console.error("Signup failed:", data.error || "Unknown error");
+        setIsError(true);
+        setErrorMsg(data.error || "Unknown error");
       }
     } catch (error) {
-      console.error("Error occurred during signup:", error.message);
+      console.error(error);
+      setIsError(true);
+      setErrorMsg("Error occurred during signup. Try again.");
     }
   };
+
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>
+      {isError && <p>{errorMsg}</p>}
       <form onSubmit={handleSubmit}>
         <label>
           Username:
           <input
-            type="username"
+            type="text"
             name="username"
             value={form.username}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -66,6 +72,7 @@ function Signup() {
             name="email"
             value={form.email}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -75,6 +82,7 @@ function Signup() {
             name="password"
             value={form.password}
             onChange={handleChange}
+            required
           />
         </label>
         <button type="submit">Sign Up</button>
