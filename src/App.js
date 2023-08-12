@@ -15,11 +15,11 @@ import SignOut from "./components/SignOut.jsx";
 import SignIn from "./components/SignIn.jsx";
 import Footer from "./components/Footer.jsx";
 import Reviews from "./components/Reviews.jsx";
-import ImageGrid from "./components/ImageGrid"; // Import the ImageGrid component
+import ImageGrid from "./components/ImageGrid";
 import Profile from "./components/Profile.jsx";
 import { getUser } from "./apiConfig/apiConfig.js";
-import { useAuth } from "./apiConfig/authContent.js";
-import { AuthProvider } from "./apiConfig/authContent.js";
+import { useAuth, AuthProvider } from "./apiConfig/authContent.js";
+
 function App() {
   return (
     <div className="App">
@@ -30,45 +30,52 @@ function App() {
   );
 }
 
+const routeConfig = [
+  { path: "/", element: <Home imageSize="100px" /> },
+  { path: "/signup", element: <SignUp /> },
+  { path: "/signin", element: <SignIn /> },
+  { path: "/signout", element: <SignOut /> },
+  { path: "/profile", element: <Profile /> },
+  { path: "/menu", element: <Menu /> },
+  { path: "/order", element: <OrderForm token={localStorage.getItem('token')} /> },
+  { path: "/faq", element: <Faq /> },
+  { path: "/confirmation", element: <Confirmation /> },
+  { path: "/reviews", element: <Reviews /> },
+];
+
 function AppContent() {
   const { setCurrentUser } = useAuth();
-
+  
   useEffect(() => {
-    const fetchUser = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const decodedToken = jwtDecode(token);
-        const userId = decodedToken.userId; // Adjust depending on the actual structure of your token
-    
-        if (userId) {
-          const user = await getUser(userId);
-          setCurrentUser(user);
-        } else {
-          console.error('UserId not found in token');
-          setCurrentUser(null);
-        }
-      } else {
-        setCurrentUser(null);
-      }
-    };
+
+  const fetchUser = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return setCurrentUser(null);
+
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.userId;
+
+    if (!userId) {
+      console.error('UserId not found in token');
+      return setCurrentUser(null);
+    }
+
+    const user = await getUser(userId);
+    setCurrentUser(user);
+  }
     fetchUser();
   }, [setCurrentUser]);
 
   return (
     <>
       <Navbar />
-      <div className="backgroundContainer">{<ImageGrid />}</div>
+      <div className="backgroundContainer">
+        <ImageGrid />
+      </div>
       <Routes>
-        <Route path="/" element={<Home imageSize={"100px"} />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signout" element={<SignOut />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/order" element={<OrderForm token={localStorage.getItem('token')} />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/reviews" element={<Reviews />} />
+        {routeConfig.map((route, index) => (
+          <Route key={index} path={route.path} element={route.element} />
+        ))}
       </Routes>
       <Footer />
     </>
@@ -76,4 +83,3 @@ function AppContent() {
 }
 
 export default App;
-

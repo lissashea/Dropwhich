@@ -13,7 +13,7 @@ const apiConfig = {
         const { data } = await axios.post(`${BASE_URL}/users/signup`, userData);
         return data;
       } catch (error) {
-        throw error.response.data;
+        throw new Error(error.response.data.message || "Signup failed");
       }
     },
     signIn: async (credentials) => {
@@ -119,14 +119,14 @@ const apiConfig = {
   order: {
     getAllOrders: () => fetch(`${BASE_URL}/orders`),
     createOrder: (orderData, userToken) =>
-    fetch(`${BASE_URL}/orders`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${userToken}` // Assuming JWT is used
-      },
-      body: JSON.stringify(orderData),
-    }), 
+      fetch(`${BASE_URL}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`, // Assuming JWT is used
+        },
+        body: JSON.stringify(orderData),
+      }),
   },
 };
 

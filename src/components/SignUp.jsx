@@ -25,27 +25,27 @@ function Signup() {
     event.preventDefault();
     try {
       // Assuming signUp is a method in apiConfig.user (this needs to be confirmed)
-      const response = await apiConfig.user.signUp(form);
-
-      if (response.ok) {
+      const data = await apiConfig.user.signUp(form);
+      if (data && data.token) {
         console.log("Signup successful!");
+        // Logging the user id after signup
+        if (data.user && data.user._id) {
+          console.log("User ID:", data.user._id);
+        } else if (data.user && data.user.id) {
+          console.log("User ID:", data.user.id);
+        }
 
-        // Set the token and current user in the context after successful signup
-        // NOTE: Assuming the response has the token and user details. Adjust as needed.
-        const responseData = await response.json(); // Parse the JSON response
-        setToken(responseData.token); // Save the token to the context
-        setCurrentUser(responseData.user); // Save the user details to the context
-
+        setToken(data.token); // Save the token to the context
+        setCurrentUser(data.user); // Save the user details to the context
         navigate("/profile"); // Use navigate to redirect to the profile page
       } else {
         // Handle signup failure
-        console.error("Signup failed:", response.status, response.statusText);
+        console.error("Signup failed:", data.error || "Unknown error");
       }
     } catch (error) {
       console.error("Error occurred during signup:", error.message);
     }
   };
-
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>

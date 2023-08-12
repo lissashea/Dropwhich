@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import apiConfig from "../apiConfig/apiConfig.js";
 import "./Profile.css";
+import { useAuth } from "../apiConfig/authContent.js";
 
 function Profile() {
+  const { currentUser } = useAuth();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
@@ -17,16 +19,24 @@ function Profile() {
     allergies: [],
   });
   useEffect(() => {
-    const userData = apiConfig.user.getCurrentUser();
-    if (userData && userData.profile) {
-      setUser(userData);
-      setFormData(userData.profile); // Grab the nested profile for formData
-      setIsLoading(false);
+    if (currentUser) {
+        setUser(currentUser);
+        setFormData(prevData => ({
+            ...prevData,
+            username: currentUser.username || "",
+            name: currentUser.name || "",
+            street: currentUser.street || "",
+            city: currentUser.city || "",
+            zipCode: currentUser.zipCode || "",
+            phone: currentUser.phone || "",
+            email: currentUser.email || "",
+            allergies: currentUser.allergies || []
+        }));
+        setIsLoading(false);
     } else {
-      setIsLoading(false);
+        setIsLoading(false);
     }
-}, []);
-
+}, [currentUser]);
 
   const handleEditModeToggle = () => {
     setEditMode(!editMode);
@@ -42,22 +52,25 @@ function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const updatedData = {
-        profile: formData
+        profile: formData,
       };
-  
-      const updatedUser = await apiConfig.user.updateUser(user._id, updatedData);
+
+      const updatedUser = await apiConfig.user.updateUser(
+        user._id,
+        updatedData
+      );
       console.log("Updated user data:", updatedUser);
-  
-      setUser(updatedUser);  // Update user at App level
+
+      setUser(updatedUser); // Update user at App level
       setEditMode(false);
     } catch (error) {
       console.error("Error updating profile:", error);
     }
   };
-  
+
   return (
     <div className="profile-container">
       <h2>Profile</h2>
@@ -144,16 +157,16 @@ function Profile() {
             </form>
           ) : (
             <div>
-              <p>Name: {user.username}</p>
+              <p>Name: {user && user.username}</p>
               <p>Street: {user.street}</p>
               <p>City: {user.city}</p>
               <p>Zip Code: {user.zipCode}</p>
               <p>Phone: {user.phone}</p>
               <p>Email: {user.email}</p>
               <p>
-              Allergies (comma-separated):{" "}
-              {user.allergies ? user.allergies.join(", ") : ""}
-            </p>
+                Allergies (comma-separated):{" "}
+                {user.allergies ? user.allergies.join(", ") : ""}
+              </p>
               <button type="button" onClick={handleEditModeToggle}>
                 Edit Profile
               </button>

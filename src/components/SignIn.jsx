@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./SignIn.css";
-import { signIn, getUser } from "../apiConfig/apiConfig.js";
+import { signIn } from "../apiConfig/apiConfig.js";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../apiConfig/authContent.js";
 
 const SignIn = () => {
-  const { currentUser, setCurrentUser, token, setToken, signOut } = useAuth();
+  const { setCurrentUser } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({

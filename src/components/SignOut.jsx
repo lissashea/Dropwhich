@@ -1,5 +1,5 @@
+import React, { useEffect, useCallback } from "react";
 import "./SignOut.css";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../apiConfig/authContent.js";
 
@@ -7,16 +7,14 @@ function SignOut() {
   const navigate = useNavigate();
   const { signOut } = useAuth();
 
-  const handleSignOut = () => {
+  const handleSignOut = useCallback(() => {
     signOut();
-    // Redirect the user to the home or login page after signing out
-    navigate("/signin"); // Adjust this to your desired route
-  };
+    navigate('/');  // Assuming you want to redirect to the home page after signing out
+  }, [signOut, navigate]);
 
-  // If you want to sign out automatically when the component is mounted:
   useEffect(() => {
     handleSignOut();
-  }, []);
+  }, [handleSignOut]);
 
   return (
     <div className="signout-container">
