@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./OrderForm.css";
 import Countdown from "./Countdown.jsx"; // Import the Countdown component
-import apiConfig from '../apiConfig/apiConfig.js';
-
+import apiConfig from "../apiConfig/apiConfig.js";
 
 function OrderForm({ user, token }) {
   const [venmoConfirmed, setVenmoConfirmed] = useState(false);
@@ -64,11 +63,20 @@ function OrderForm({ user, token }) {
         ...order,
         user: currentUser._id, // Assign the authenticated user's ID to the order
       };
-      apiConfig.order.createOrder(updatedOrder).then((response) => {
-        if (response.ok) {
-          setOrderSubmitted(true);
-        }
-      });
+      apiConfig.order
+        .createOrder(updatedOrder, token) // passing token here
+        .then((response) => response.json()) // convert response to JSON
+        .then((data) => {
+          if (data.error) {
+            console.error("Order creation failed:", data.error);
+            // handle error e.g., show error to user
+          } else {
+            setOrderSubmitted(true);
+          }
+        })
+        .catch((error) => {
+          console.error("API call failed:", error);
+        });
     }
   };
 

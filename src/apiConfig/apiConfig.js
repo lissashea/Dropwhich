@@ -87,7 +87,7 @@ const apiConfig = {
     },
 
     getUserByToken: async (token) => {
-      const response = await fetch(`${BASE_URL}/me`, {
+      const response = await fetch(`${BASE_URL}/users/me`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -118,18 +118,20 @@ const apiConfig = {
 
   order: {
     getAllOrders: () => fetch(`${BASE_URL}/orders`),
-    createOrder: (orderData) =>
-      fetch(`${BASE_URL}/orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
-      }),
+    createOrder: (orderData, userToken) =>
+    fetch(`${BASE_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${userToken}` // Assuming JWT is used
+      },
+      body: JSON.stringify(orderData),
+    }), 
   },
 };
 
 export const signIn = apiConfig.user.signIn;
+export const signUp = apiConfig.user.signUp;
 export const getUser = apiConfig.user.getUser;
 export const signOut = apiConfig.user.signOut;
 export default apiConfig;

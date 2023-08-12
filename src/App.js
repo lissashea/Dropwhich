@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 import jwtDecode from "jwt-decode";
 import "slick-carousel/slick/slick.css";
@@ -7,7 +7,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
 import OrderForm from "./components/OrderForm";
-// import MailingListForm from "./components/MailingListForm";
 import Confirmation from "./components/Confirmation.jsx";
 import Faq from "./components/Faq.jsx";
 import Navbar from "./components/NavBar.jsx";
@@ -53,7 +52,7 @@ function AppContent() {
       }
     };
     fetchUser();
-  }, []);
+  }, [setCurrentUser]);
 
   return (
     <>
@@ -61,13 +60,13 @@ function AppContent() {
       <div className="backgroundContainer">{<ImageGrid />}</div>
       <Routes>
         <Route path="/" element={<Home imageSize={"100px"} />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/order" element={<OrderForm token={localStorage.getItem('token')} />} />
         <Route path="/faq" element={<Faq />} />
-        <Route path="/signup" element={<SignUp />} />
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/reviews" element={<Reviews />} />
       </Routes>
