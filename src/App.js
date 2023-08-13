@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./index.css";
-import jwtDecode from "jwt-decode";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Route, Routes } from "react-router-dom";
@@ -17,8 +16,7 @@ import Footer from "./components/Footer.jsx";
 import Reviews from "./components/Reviews.jsx";
 import ImageGrid from "./components/ImageGrid";
 import Profile from "./components/Profile.jsx";
-import { getUser } from "./apiConfig/apiConfig.js";
-import { useAuth, AuthProvider } from "./apiConfig/authContent.js";
+import { AuthProvider } from "./apiConfig/authContent.js";
 
 function App() {
   return (
@@ -37,35 +35,13 @@ const routeConfig = [
   { path: "/signout", element: <SignOut /> },
   { path: "/profile", element: <Profile /> },
   { path: "/menu", element: <Menu /> },
-  { path: "/order", element: <OrderForm token={localStorage.getItem('token')} /> },
+  { path: "/order", element: <OrderForm /> },
   { path: "/faq", element: <Faq /> },
   { path: "/confirmation", element: <Confirmation /> },
   { path: "/reviews", element: <Reviews /> },
 ];
 
 function AppContent() {
-  const { setCurrentUser } = useAuth();
-  
-  useEffect(() => {
-
-  const fetchUser = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) return setCurrentUser(null);
-
-    const decodedToken = jwtDecode(token);
-    const userId = decodedToken.userId;
-
-    if (!userId) {
-      console.error('UserId not found in token');
-      return setCurrentUser(null);
-    }
-
-    const user = await getUser(userId);
-    setCurrentUser(user);
-  }
-    fetchUser();
-  }, [setCurrentUser]);
-
   return (
     <>
       <Navbar />
