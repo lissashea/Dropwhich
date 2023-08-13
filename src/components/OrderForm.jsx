@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./OrderForm.css";
-import Countdown from "./Countdown.jsx"; // Import the Countdown component
+import Countdown from "./Countdown.jsx";
 import apiConfig from "../apiConfig/apiConfig.js";
+import { useAuth } from "../apiConfig/authContent.js";
 
-function OrderForm({ user, token }) {
+const OrderForm = () => { // Corrected syntax here
+  const { currentUser } = useAuth(); 
   const [venmoConfirmed, setVenmoConfirmed] = useState(false);
   const [order, setOrder] = useState({
-    user: "", // Store the user ID associated with the order
+    user: "", 
     sandwich: "",
     side: "",
-    sideSize: "", // Add sideSize field
-    total: 0, // Add total field
+    sideSize: "", 
+    total: 0, 
     deliveryInstructions: "",
   });
 
-  const [orderSubmitted, setOrderSubmitted] = useState(false); // Define orderSubmitted state
-  const [currentUser, setCurrentUser] = useState(null); // Store the authenticated user's information
+  const [orderSubmitted, setOrderSubmitted] = useState(false);
 
   const sandwichBasePrice = 15;
   const sideSmallPrice = 4.5;
@@ -64,8 +65,8 @@ function OrderForm({ user, token }) {
         user: currentUser._id, // Assign the authenticated user's ID to the order
       };
       apiConfig.order
-        .createOrder(updatedOrder, token) // passing token here
-        .then((response) => response.json()) // convert response to JSON
+        .createOrder(updatedOrder)
+        .then((response) => response.json()) 
         .then((data) => {
           if (data.error) {
             console.error("Order creation failed:", data.error);
@@ -79,20 +80,6 @@ function OrderForm({ user, token }) {
         });
     }
   };
-
-  useEffect(() => {
-    if (token) {
-      apiConfig.user
-        .getUserByToken(token)
-        .then((data) => {
-          console.log("User received from API:", data.user);
-          setCurrentUser(data.user);
-        })
-        .catch((error) => {
-          console.error("Failed to fetch user by token:", error);
-        });
-    }
-  }, [token]);
 
   return (
     <div className="orderForm">
