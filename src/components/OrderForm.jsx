@@ -5,7 +5,7 @@ import apiConfig from "../apiConfig/apiConfig.js";
 import { useAuth } from "../apiConfig/authContent.js";
 
 const OrderForm = () => { // Corrected syntax here
-  const { currentUser } = useAuth(); 
+  const { currentUser, userToken } = useAuth(); // Add userToken here
   const [venmoConfirmed, setVenmoConfirmed] = useState(false);
   const [order, setOrder] = useState({
     user: "", 
@@ -56,8 +56,7 @@ const OrderForm = () => { // Corrected syntax here
 
     // Update the order state
     setOrder({ ...order, [name]: value, total });
-  };
-  const handleSubmit = (event) => {
+  };const handleSubmit = (event) => {
     event.preventDefault();
     if (currentUser) {
       const updatedOrder = {
@@ -65,9 +64,8 @@ const OrderForm = () => { // Corrected syntax here
         user: currentUser._id, // Assign the authenticated user's ID to the order
       };
       apiConfig.order
-        .createOrder(updatedOrder)
-        .then((response) => response.json()) 
-        .then((data) => {
+        .createOrder(updatedOrder, userToken, currentUser._id)
+        .then((data) => {  // Modified here to handle Axios response
           if (data.error) {
             console.error("Order creation failed:", data.error);
             // handle error e.g., show error to user
@@ -80,6 +78,7 @@ const OrderForm = () => { // Corrected syntax here
         });
     }
   };
+
 
   return (
     <div className="orderForm">

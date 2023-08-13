@@ -1,5 +1,4 @@
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 
 const BASE_URL = "http://localhost:4000/api"; // Replace this with your backend URL
 
@@ -17,28 +16,12 @@ const apiConfig = {
         throw new Error(error.response?.data?.message || "Signup failed");
       }
     },
-
     signIn: async (credentials) => {
-      const { data } = await axios.post(`${BASE_URL}/users/signin`, credentials);
-      localStorage.setItem("token", data.token);
-
-      if (data.token && data.user) {
-        currentToken = data.token;
-        currentUser = data.user;
-        currentId = data.user._id;
-
-        const decodedToken = jwtDecode(data.token);
-        const userId = decodedToken.userId; // Adjust based on your token's structure
-
-        if (userId) {
-          const user = await apiConfig.user.getUser(userId);
-          currentUser = user; // Update the currentUser
-        } else {
-          console.error("UserId not found in token");
-        }
-      }
-
-      return data;
+      const { data } = await axios.post(
+        `${BASE_URL}/users/signin`,
+        credentials
+      );
+      return data; // Let the caller handle side effects like saving to local storage
     },
 
     signOut: () => {
@@ -77,11 +60,15 @@ const apiConfig = {
     },
 
     updateUser: async (userId, userData) => {
-      const { data } = await axios.put(`${BASE_URL}/users/${userId}`, userData, {
-        headers: {
-          Authorization: `Bearer ${currentToken}`,
-        },
-      });
+      const { data } = await axios.put(
+        `${BASE_URL}/users/${userId}`,
+        userData,
+        {
+          headers: {
+            Authorization: `Bearer ${currentToken}`,
+          },
+        }
+      );
       return data;
     },
 
@@ -97,13 +84,21 @@ const apiConfig = {
       return data;
     },
 
-    createOrder: async (orderData, userToken) => {
-      const { data } = await axios.post(`${BASE_URL}/orders/${currentUser._id}`, orderData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`, // Assuming JWT is used
-        },
-      });
+    createOrder: async (orderData, userToken, userId) => {
+      // Debug: Print out the URL and order data before making the API call
+      console.log("Constructed URL:", `${BASE_URL}/orders/${userId}`);
+      console.log("Order Data:", orderData);
+
+      const { data } = await axios.post(
+        `${BASE_URL}/orders/${userId}`,
+        orderData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`, // Assuming JWT is used
+          },
+        }
+      );
       return data;
     },
   },

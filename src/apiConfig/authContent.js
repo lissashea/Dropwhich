@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { signIn as apiSignIn } from "./apiConfig.js";
 
 const AuthContext = createContext();
 
@@ -9,6 +10,15 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('token'));
+
+    const signIn = async (credentials) => {
+      const data = await apiSignIn(credentials);
+      if (data && data.token) {
+        localStorage.setItem("token", data.token);
+        setToken(data.token);
+        setCurrentUser(data.user); // Adjust as necessary based on the shape of your returned data
+      }
+    };
 
     useEffect(() => {
         if (token) {
@@ -23,6 +33,7 @@ export const AuthProvider = ({ children }) => {
         setCurrentUser,
         token,
         setToken,
+        signIn,  // This is now your context's signIn which calls apiSignIn
         signOut: () => {
             localStorage.removeItem('token');
             setToken(null);
@@ -36,3 +47,4 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
