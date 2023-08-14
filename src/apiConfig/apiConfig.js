@@ -2,10 +2,6 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:4000/api"; // Replace this with your backend URL
 
-let currentUser = null;
-let currentToken = null;
-let currentId = null;
-
 const apiConfig = {
   user: {
     signUp: async (userData) => {
@@ -24,19 +20,8 @@ const apiConfig = {
       return data; // Let the caller handle side effects like saving to local storage
     },
 
-    signOut: () => {
-      localStorage.removeItem("token");
-      currentUser = null;
-      currentToken = null;
-      currentId = null;
-    },
-
-    getCurrentUser: () => currentUser,
-    getToken: () => currentToken,
-    getId: () => currentId,
-
-    getAuthenticatedUser: async () => {
-      const { data } = await axios.get(`${BASE_URL}/users/${currentUser._id}`);
+    getAuthenticatedUser: async (userId) => {
+      const { data } = await axios.get(`${BASE_URL}/users/${userId}`);
       return data;
     },
 
@@ -58,14 +43,13 @@ const apiConfig = {
       });
       return data;
     },
-
-    updateUser: async (userId, userData) => {
+    updateUser: async (userId, userData, token) => {
       const { data } = await axios.put(
         `${BASE_URL}/users/${userId}`,
         userData,
         {
           headers: {
-            Authorization: `Bearer ${currentToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -108,6 +92,5 @@ export const signIn = apiConfig.user.signIn;
 export const signUp = apiConfig.user.signUp;
 export const updateUser = apiConfig.user.updateUser;
 export const getUser = apiConfig.user.getUser;
-export const signOut = apiConfig.user.signOut;
 export const createOrder = apiConfig.order.createOrder;
 export default apiConfig;

@@ -4,7 +4,8 @@ import Countdown from "./Countdown.jsx";
 import apiConfig from "../apiConfig/apiConfig.js";
 import { useAuth } from "../apiConfig/authContent.js";
 
-const OrderForm = () => { // Corrected syntax here
+const OrderForm = () => {
+  const { token } = useAuth(); // Corrected syntax here
   const { currentUser, userToken } = useAuth(); // Add userToken here
   const [venmoConfirmed, setVenmoConfirmed] = useState(false);
   const [order, setOrder] = useState({

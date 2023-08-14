@@ -35,11 +35,14 @@ export const AuthProvider = ({ children }) => {
     setToken,
     signIn, // This is now your context's signIn which calls apiSignIn
     signOut: () => {
-      localStorage.removeItem("token");
-      setToken(null);
-      setCurrentUser(null);
-    },
-  };
+        console.log("Clearing token from localStorage");
+        localStorage.removeItem("token");
+        console.log("Setting token state to null");
+        setToken(null);
+        console.log("Setting currentUser state to null");
+        setCurrentUser(null);
+     }
+}     
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

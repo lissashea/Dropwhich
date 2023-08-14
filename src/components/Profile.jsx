@@ -81,11 +81,20 @@ function Profile() {
           {editMode ? (
             <form onSubmit={handleSubmit}>
               <p>
-                Name:
+                Username:
                 <input
                   type="text"
                   name="username"
                   value={formData.username}
+                  onChange={handleInputChange}
+                />
+              </p>
+              <p>
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
                   onChange={handleInputChange}
                 />
               </p>
