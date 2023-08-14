@@ -4,12 +4,7 @@ import "./NavBar.css";
 import { useAuth } from "../apiConfig/authContent.js";
 
 const NavBar = () => {
-  const { currentUser, signOut } = useAuth();
-
-  const handleSignOut = () => {
-    signOut();
-    // Optionally redirect to home or sign in page after signing out
-  };
+  const { currentUser } = useAuth();
 
   return (
     <div className="navContainer">

@@ -2,41 +2,41 @@ import React, { useState, useEffect } from "react";
 import apiConfig from "../apiConfig/apiConfig.js";
 import "./Profile.css";
 import { useAuth } from "../apiConfig/authContent.js";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const { currentUser } = useAuth();
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   const [editMode, setEditMode] = useState(false);
-  const [formData, setFormData] = useState({
-    username: "",
-    name: "",
-    street: "",
-    city: "",
-    zipCode: "",
-    phone: "",
-    email: "",
-    allergies: [],
-  });
+  const [formData, setFormData] = useState({});
+
   useEffect(() => {
     if (currentUser) {
-        setUser(currentUser);
-        setFormData(prevData => ({
-            ...prevData,
-            username: currentUser.username || "",
-            name: currentUser.name || "",
-            street: currentUser.street || "",
-            city: currentUser.city || "",
-            zipCode: currentUser.zipCode || "",
-            phone: currentUser.phone || "",
-            email: currentUser.email || "",
-            allergies: currentUser.allergies || []
-        }));
-        setIsLoading(false);
+      const {
+        username = "",
+        name = "",
+        street = "",
+        city = "",
+        zipCode = "",
+        phone = "",
+        email = "",
+        allergies = [],
+      } = currentUser;
+
+      setFormData({
+        username,
+        name,
+        street,
+        city,
+        zipCode,
+        phone,
+        email,
+        allergies,
+      });
     } else {
-        setIsLoading(false);
+      navigate("/signin"); // Redirect to sign-in page if user is not authenticated
     }
-}, [currentUser]);
+  }, [currentUser, navigate]);
 
   const handleEditModeToggle = () => {
     setEditMode(!editMode);
@@ -59,12 +59,11 @@ function Profile() {
       };
 
       const updatedUser = await apiConfig.user.updateUser(
-        user._id,
+        currentUser._id,
         updatedData
       );
       console.log("Updated user data:", updatedUser);
 
-      setUser(updatedUser); // Update user at App level
       setEditMode(false);
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -73,12 +72,10 @@ function Profile() {
 
   return (
     <div className="profile-container">
-      <h2>Profile</h2>
-      {isLoading ? (
-        <p>Loading user data...</p>
-      ) : user ? (
-        <div>
-          {editMode ? (
+    <h2>Profile</h2>
+    {currentUser ? (
+      <div>
+        {editMode ? (
             <form onSubmit={handleSubmit}>
               <p>
                 Username:
@@ -166,26 +163,26 @@ function Profile() {
             </form>
           ) : (
             <div>
-              <p>Name: {user && user.username}</p>
-              <p>Street: {user.street}</p>
-              <p>City: {user.city}</p>
-              <p>Zip Code: {user.zipCode}</p>
-              <p>Phone: {user.phone}</p>
-              <p>Email: {user.email}</p>
-              <p>
-                Allergies (comma-separated):{" "}
-                {user.allergies ? user.allergies.join(", ") : ""}
-              </p>
-              <button type="button" onClick={handleEditModeToggle}>
-                Edit Profile
-              </button>
-            </div>
-          )}
-        </div>
-      ) : (
-        <p>No user data found.</p>
-      )}
-    </div>
+            <p>Name: {currentUser.username}</p>
+            <p>Street: {currentUser.street}</p>
+            <p>City: {currentUser.city}</p>
+            <p>Zip Code: {currentUser.zipCode}</p>
+            <p>Phone: {currentUser.phone}</p>
+            <p>Email: {currentUser.email}</p>
+            <p>
+              Allergies (comma-separated):{" "}
+              {currentUser.allergies ? currentUser.allergies.join(", ") : ""}
+            </p>
+            <button type="button" onClick={handleEditModeToggle}>
+              Edit Profile
+            </button>
+          </div>
+        )}
+      </div>
+    ) : (
+      <p>No user data found.</p>
+    )}
+  </div>
   );
 }
 
